@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{csrf_token()}}" >
     <title>Skydash Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('admin')}}/vendors/feather/feather.css">
@@ -59,6 +60,7 @@
     <script src="{{asset('admin')}}/js/dashboard.js"></script>
     <script src="{{asset('admin')}}/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+    <script src="{{asset('admin')}}/js/custom.js"></script>
 </body>
 
 </html>
