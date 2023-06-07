@@ -16,14 +16,14 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
         $adminRecord = [
-            'name' => 'Super Admin',
-            'type' => 'superadmin',
-            'vendor_id' => 0,
+            'name' => 'Efaz',
+            'type' => 'vendor',
+            'vendor_id' => 1,
             'mobile' => '01740308899',
-            'email' => 'admin@admin.com',
+            'email' => 'e@gmail.comm',
             'password' => '$2a$12$ykuldkDjj4bxYdtdiCGHkOLh9apI6lq0s99EEJTiVecHqdyj1M73q',
             'image' => '',
-            'status' => 1,
+            'status' => 0,
         ];
 
         Admin::insert($adminRecord);

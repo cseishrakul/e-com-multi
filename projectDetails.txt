@@ -7,3 +7,9 @@
 7. In dashboard lets have admin settings option.and from there lets change admin password;
 
 8. Lets change admin details as well from settings;
+9. Lets update admin image with the help of intervention package;
+
+// Lets work with vendor
+
+10. Lets make vendor,vendorbusinessdetail & vendorBankDetail 3 model + database;
+11. Lets update 3 model + database of (10)no. 
