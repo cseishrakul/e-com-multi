@@ -16,7 +16,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center">Update Admin Password</h4>
+                            <h4 class="card-title text-center">Update Admin Details</h4>
                             <hr>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -36,33 +36,41 @@
                                     </button>
                                 </div>
                             @endif
-                            <form class="forms-sample" action="{{ url('admin/update-admin-password') }}" method="POST">
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            <form class="forms-sample" action="{{ url('admin/update-admin-details') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Admin Username/ Email</label>
-                                    <input type="text" class="form-control" value="{{ $adminDetails['email'] }}"
-                                        readonly>
+                                    <input type="text" class="form-control"
+                                        value="{{ Auth::guard('admin')->user()->email }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Admin Type</label>
-                                    <input type="text" class="form-control" value="{{ $adminDetails['type'] }}" readonly>
+                                    <input type="text" class="form-control"
+                                        value="{{ Auth::guard('admin')->user()->type }}" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label for="current_password">Current Password</label>
-                                    <input type="password" class="form-control" id="current_password"
-                                        placeholder="Current Password" name="current_password">
-                                    <span id="check_password"></span>
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Name"
+                                        name="name" value="{{ Auth::guard('admin')->user()->name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="new_password">New Password</label>
-                                    <input type="password" class="form-control" id="new_password" placeholder="New Password"
-                                        name="new_password">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="text" class="form-control" id="mobile" placeholder="Mobile"
+                                        name="mobile" value="{{ Auth::guard('admin')->user()->mobile }}" minlength="11"
+                                        maxlength="14">
                                 </div>
-                                <div class="form-group">
-                                    <label for="confirm_password">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirm_password"
-                                        placeholder="Confirm Password" name="confirm_password">
-                                </div>
+
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             </form>
                         </div>

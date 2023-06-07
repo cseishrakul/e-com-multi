@@ -5,3 +5,5 @@
 5. Lets Make Auth for admin login with the help of breeze.So that no can see dashboard without login in to it; And Beside this lets have a logout option from dashboard and redirect admin to login page;
 6. Lets do authentication of admin login page;
 7. In dashboard lets have admin settings option.and from there lets change admin password;
+
+8. Lets change admin details as well from settings;
