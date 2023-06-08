@@ -12,4 +12,4 @@
 // Lets work with vendor
 
 10. Lets make vendor,vendorbusinessdetail & vendorBankDetail 3 model + database;
-11. Lets update 3 model + database of (10)no. 
+11. Lets update 3 model + database of (10)no. from vendor dashboard;

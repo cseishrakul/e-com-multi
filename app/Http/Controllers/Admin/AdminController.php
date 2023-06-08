@@ -8,6 +8,7 @@ use Auth;
 use Hash;
 use App\Models\Admin;
 use App\Models\Vendor;
+use App\Models\VendorsBankDetail;
 use App\Models\VendorsBusinessDetail;
 use Image;
 
@@ -230,17 +231,60 @@ class AdminController extends Controller
                 }
 
                 // Update in vendor business table
-                VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update(['shop_name' => $data['shop_name'],'shop_address' => $data['shop_address'],'shop_city' => $data['shop_city'],'shop_state' => $data['shop_state'],'shop_country' => $data['shop_country'],'shop_pincode' => $data['shop_pincode'], 'shop_mobile' => $data['shop_mobile'], 'shop_website' => $data['shop_website'],'address_proof' => $data['address_proof'], 'address_proof_image' => $imageName,'business_license_number' => $data['business_license_number'], 'gst_number' => $data['gst_number'], 'pan_number' => $data['pan_number'],]);
+                VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update(['shop_name' => $data['shop_name'], 'shop_address' => $data['shop_address'], 'shop_city' => $data['shop_city'], 'shop_state' => $data['shop_state'], 'shop_country' => $data['shop_country'], 'shop_pincode' => $data['shop_pincode'], 'shop_mobile' => $data['shop_mobile'], 'shop_website' => $data['shop_website'], 'address_proof' => $data['address_proof'], 'address_proof_image' => $imageName, 'business_license_number' => $data['business_license_number'], 'gst_number' => $data['gst_number'], 'pan_number' => $data['pan_number'],]);
 
                 return redirect()->back()->with('success_message', 'Vendor Details Updated Successfully!');
             }
 
-            $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            $vendorDetails = VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
         } else if ($slug == "bank") {
+            if ($request->isMethod('post')) {
+                $data = $request->all();
+                // echo "<pre>"; print_r($data); die;
+                // validation
+                $rules = [
+                    'account_holder_name' => 'required',
+                    'bank_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                    'account_number' => 'required|numeric',
+                ];
+
+                $customMessage = [
+                    'account_holder_name.required' => 'Name is required',
+                    'bank_name.required' => 'Bank name is required',
+                    // 'account_holder_name.regex' => 'Valid name is required',
+                    'bank_name.regex' => 'Valid bank is required',
+                    'account_number.required' => 'Account number is required',
+                    'account_number.numeric' => 'Account digit must be a number',
+                ];
+
+                $this->validate($request, $rules, $customMessage);
+
+                // Update in vendor bank table
+                VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name' => $data['account_holder_name'], 'bank_name' => $data['bank_name'], 'account_number' => $data['account_number'], 'bank_ifsc_code' => $data['bank_ifsc_code']]);
+
+                return redirect()->back()->with('success_message', 'Vendor Bank Updated Successfully!');
+            }
+            $vendorDetails = VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
         } else {
         }
 
         return view('admin.settings.vendor.update_vendor_details', compact('slug', 'vendorDetails'));
+    }
+
+
+    // Admins Function
+    public function admins($type = null)
+    {
+        $admins = Admin::query();
+        if (!empty($type)) {
+            $admins = $admins->where('type', $type);
+            $title = ucfirst($type).'s';
+        } else {
+            $title = "All Admins/Subadmins/Vendors";
+        }
+        $admins = $admins->get()->toArray();
+        // dd($admins);
+        return view('admin.admins.admins', compact('admins','title'));
     }
 
     // Admin Logout
