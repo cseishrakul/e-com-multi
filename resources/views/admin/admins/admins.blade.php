@@ -7,9 +7,9 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{$title}}</h4>
+                            <h4 class="card-title">{{ $title }}</h4>
                             <p class="card-description">
-                                 <code> </code>
+                                <code> </code>
                             </p>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered table-striped">
@@ -43,38 +43,52 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($admins as $admin)
-                                        <tr>
-                                            <td>
-                                                {{$admin['id']}}
-                                            </td>
-                                            <td>
-                                                {{$admin['name']}}
-                                            </td>
-                                            <td>
-                                                {{$admin['type']}}
-                                            </td>
-                                            <td>
-                                                {{$admin['mobile']}}
-                                            </td>
-                                            <td>
-                                                {{$admin['email']}}
-                                            </td>
-                                            <td>
-                                                <img src="{{asset('admin/photos/'.$admin['image'])}}" alt="" class="img-fluid">
-                                            </td>
-                                            <td>
-                                                @if ($admin['status'] == '1')
-                                                    <div class="badge badge-success">Active</div>
+                                            <tr>
+                                                <td>
+                                                    {{ $admin['id'] }}
+                                                </td>
+                                                <td>
+                                                    {{ $admin['name'] }}
+                                                </td>
+                                                <td>
+                                                    {{ $admin['type'] }}
+                                                </td>
+                                                <td>
+                                                    {{ $admin['mobile'] }}
+                                                </td>
+                                                <td>
+                                                    {{ $admin['email'] }}
+                                                </td>
+                                                <td>
+                                                    <img src="{{ asset('admin/photos/' . $admin['image']) }}" alt=""
+                                                        class="img-fluid">
+                                                </td>
+                                                <td>
+                                                    @if ($admin['status'] == '1')
+                                                        <a href="javascript:void(0)" class="updateAdminStatus"
+                                                            id="admin-{{ $admin['id'] }}" admin_id="{{ $admin['id'] }}">
+                                                            <i class="mdi mdi-bookmark-check" style="font-size: 25px;"
+                                                                status="Active"></i>
+                                                        </a>
                                                     @elseif($admin['status'] == '0')
-                                                    <div class="badge badge-danger">Deactived</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                Action
-                                            </td>
-                                        </tr>
+                                                    <a href="javascript:void(0)" class="updateAdminStatus"
+                                                    id="admin-{{ $admin['id'] }}" admin_id="{{ $admin['id'] }}">
+                                                    <i class="mdi mdi-bookmark-outline" style="font-size: 25px;"
+                                                        status="Inactive"></i>
+                                                </a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($admin['type'] == 'vendor')
+                                                        <a href="{{ url('admin/view-vendor-details/' . $admin['id']) }}"
+                                                            class="">
+                                                            <i class="mdi mdi-file-document" style="font-size: 25px;"></i>
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
                                         @endforeach
-                                        
+
                                     </tbody>
                                 </table>
                             </div>

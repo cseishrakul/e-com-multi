@@ -13,3 +13,7 @@
 
 10. Lets make vendor,vendorbusinessdetail & vendorBankDetail 3 model + database;
 11. Lets update 3 model + database of (10)no. from vendor dashboard;
+12. Lets fetch all admin details in admin dashboard;
+13. Lets see vendors all details from admin dashboard;
+14. Lets manage admin status from admin dashboard;
+15. Lets make countries database and with the help of this database lets select vendor's country + vendor's shop country; 

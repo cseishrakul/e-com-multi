@@ -99,9 +99,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="vendor_country">Country</label>
-                                                <input type="text" class="form-control" id="vendor_country"
-                                                    placeholder="Vendor country" name="vendor_country"
-                                                    value="{{ $vendorDetails['country'] }}">
+                                                <select name="vendor_country" id="" class="form-control text-dark">
+                                                    <option value="">Select Country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country['country_name'] }}"
+                                                            @if ($country['country_name'] == $vendorDetails['country']) selected @endif>
+                                                            {{ $country['country_name'] }} </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -230,9 +235,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="shop_country">Shop Country</label>
-                                                <input type="text" class="form-control" id="shop_country"
-                                                    placeholder="Shop country" name="shop_country"
-                                                    value="{{ $vendorDetails['shop_country'] }}">
+                                                <select name="shop_country" id="" class="form-control text-dark">
+                                                    <option value="">Select Country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country['country_name'] }}"
+                                                            @if ($country['country_name'] == $vendorDetails['shop_country']) selected @endif>
+                                                            {{ $country['country_name'] }} </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -296,7 +306,8 @@
                                         <div class="col-md-6">
                                             <label for="address_proof">Address Proof</label>
                                             <select name="address_proof" id="address_proof" class="form-control">
-                                                <option value="Passport" @if ($vendorDetails['address_proof'] == 'Passport') selected @endif>
+                                                <option value="Passport"
+                                                    @if ($vendorDetails['address_proof'] == 'Passport') selected @endif>
                                                     Passport</option>
                                                 <option value="NID" @if ($vendorDetails['address_proof'] == 'NID') selected @endif>
                                                     NID</option>
@@ -329,95 +340,95 @@
                     </div>
                 </div>
             @elseif($slug == 'bank')
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title text-center">Update Bank Information</h4>
-                            <hr>
-                            @if (Session::has('success_message'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>Success: </strong> {{ Session::get('success_message') }}
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">Update Bank Information</h4>
+                                <hr>
+                                @if (Session::has('success_message'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success: </strong> {{ Session::get('success_message') }}
 
-                                    <button class="close" type="button" data-dismiss='alert' aria-label="Close">
-                                        <span aria-hidden="true"> &times; </span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if (Session::has('error_message'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>Error: </strong> {{ Session::get('error_message') }}
+                                        <button class="close" type="button" data-dismiss='alert' aria-label="Close">
+                                            <span aria-hidden="true"> &times; </span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if (Session::has('error_message'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error: </strong> {{ Session::get('error_message') }}
 
-                                    <button class="close" type="button" data-dismiss='alert' aria-label="Close">
-                                        <span aria-hidden="true"> &times; </span>
-                                    </button>
-                                </div>
-                            @endif
+                                        <button class="close" type="button" data-dismiss='alert' aria-label="Close">
+                                            <span aria-hidden="true"> &times; </span>
+                                        </button>
+                                    </div>
+                                @endif
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                            <form class="forms-sample" action="{{ url('admin/update-vendor-details/bank') }}"
-                                method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputUsername1">Vendor Username/ Email</label>
-                                            <input type="text" class="form-control"
-                                                value="{{ Auth::guard('admin')->user()->email }}" readonly>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                <form class="forms-sample" action="{{ url('admin/update-vendor-details/bank') }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputUsername1">Vendor Username/ Email</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ Auth::guard('admin')->user()->email }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="account_holder_name">Account Holder Name</label>
+                                                <input type="text" class="form-control" id="account_holder_name"
+                                                    placeholder="Account Holder Name" name="account_holder_name"
+                                                    value="{{ $vendorDetails['account_holder_name'] }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="bank_name">Bank Name</label>
+                                                <input type="text" class="form-control" id="bank_name"
+                                                    placeholder="Bank Name" name="bank_name"
+                                                    value="{{ $vendorDetails['bank_name'] }}">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="account_holder_name">Account Holder Name</label>
-                                            <input type="text" class="form-control" id="account_holder_name"
-                                                placeholder="Account Holder Name" name="account_holder_name"
-                                                value="{{ $vendorDetails['account_holder_name'] }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="bank_name">Bank Name</label>
-                                            <input type="text" class="form-control" id="bank_name"
-                                                placeholder="Bank Name" name="bank_name"
-                                                value="{{ $vendorDetails['bank_name'] }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
+                                    <div class="row">
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="account_number">Account Number</label>
-                                            <input type="text" class="form-control" id="account_number"
-                                                placeholder="Account Number" name="account_number"
-                                                value="{{ $vendorDetails['account_number'] }}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="account_number">Account Number</label>
+                                                <input type="text" class="form-control" id="account_number"
+                                                    placeholder="Account Number" name="account_number"
+                                                    value="{{ $vendorDetails['account_number'] }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="bank_ifsc_code">Bank IFSC Code</label>
+                                                <input type="text" class="form-control" id="bank_ifsc_code"
+                                                    placeholder="Bank IFSC Code" name="bank_ifsc_code"
+                                                    value="{{ $vendorDetails['bank_ifsc_code'] }}">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="bank_ifsc_code">Bank IFSC Code</label>
-                                            <input type="text" class="form-control" id="bank_ifsc_code"
-                                                placeholder="Bank IFSC Code" name="bank_ifsc_code"
-                                                value="{{ $vendorDetails['bank_ifsc_code'] }}">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                            </form>
+                                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endif
 
 

@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use App\Models\Admin;
+use App\Models\Country;
 use App\Models\Vendor;
 use App\Models\VendorsBankDetail;
 use App\Models\VendorsBusinessDetail;
 use Image;
+use Session;
 
 class AdminController extends Controller
 {
@@ -47,6 +49,7 @@ class AdminController extends Controller
     // dashboard function
     public function dashboard()
     {
+        Session::put('page','dashboard');
         return view('admin.dashboard');
     }
 
@@ -233,7 +236,7 @@ class AdminController extends Controller
                 // Update in vendor business table
                 VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update(['shop_name' => $data['shop_name'], 'shop_address' => $data['shop_address'], 'shop_city' => $data['shop_city'], 'shop_state' => $data['shop_state'], 'shop_country' => $data['shop_country'], 'shop_pincode' => $data['shop_pincode'], 'shop_mobile' => $data['shop_mobile'], 'shop_website' => $data['shop_website'], 'address_proof' => $data['address_proof'], 'address_proof_image' => $imageName, 'business_license_number' => $data['business_license_number'], 'gst_number' => $data['gst_number'], 'pan_number' => $data['pan_number'],]);
 
-                return redirect()->back()->with('success_message', 'Vendor Details Updated Successfully!');
+                return redirect()->back()->with('success_message', 'Vendor Business Details Updated Successfully!');
             }
 
             $vendorDetails = VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
@@ -262,13 +265,14 @@ class AdminController extends Controller
                 // Update in vendor bank table
                 VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name' => $data['account_holder_name'], 'bank_name' => $data['bank_name'], 'account_number' => $data['account_number'], 'bank_ifsc_code' => $data['bank_ifsc_code']]);
 
-                return redirect()->back()->with('success_message', 'Vendor Bank Updated Successfully!');
+                return redirect()->back()->with('success_message', 'Vendor Bank Details Updated Successfully!');
             }
             $vendorDetails = VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
         } else {
         }
 
-        return view('admin.settings.vendor.update_vendor_details', compact('slug', 'vendorDetails'));
+        $countries = Country::where('status',1)->get()->toArray();
+        return view('admin.settings.vendor.update_vendor_details', compact('slug', 'vendorDetails','countries'));
     }
 
 
@@ -278,13 +282,37 @@ class AdminController extends Controller
         $admins = Admin::query();
         if (!empty($type)) {
             $admins = $admins->where('type', $type);
-            $title = ucfirst($type).'s';
+            $title = ucfirst($type) . 's';
         } else {
             $title = "All Admins/Subadmins/Vendors";
         }
         $admins = $admins->get()->toArray();
         // dd($admins);
-        return view('admin.admins.admins', compact('admins','title'));
+        return view('admin.admins.admins', compact('admins', 'title'));
+    }
+
+    // View Vendor details function
+    public function viewVendorDetails($id)
+    {
+        $vendorDetails = Admin::with('vendorPersonal','vendorBusiness','vendorBank')->where('id',$id)->first();
+        $vendorDetails = json_decode(json_encode($vendorDetails),true);
+        // dd($vendorDetails);
+        return view('admin.admins.vendor.view_vendor_details',compact('vendorDetails'));
+    }
+
+    // Update admin statue
+    public function updateAdminStatus(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            // echo "<pre>"; print_r($data);die;
+            if($data['status'] == 'Active'){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            Admin::where('id',$data['admin_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status,'admin_id' => $data['admin_id']]);
+        }
     }
 
     // Admin Logout

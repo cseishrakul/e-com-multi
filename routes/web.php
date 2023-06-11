@@ -35,21 +35,26 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         // Admin dashborar route
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
         // Update Admin Password
-        Route::match(['get','post'],'/update-admin-password',[AdminController::class,'updatePassword']);
-        Route::post('/check-admin-password',[AdminController::class,'checkAdminPassword']);
+        Route::match(['get', 'post'], '/update-admin-password', [AdminController::class, 'updatePassword']);
+        Route::post('/check-admin-password', [AdminController::class, 'checkAdminPassword']);
 
         // Update Admin Details
-        Route::match(['get','post'],'/update-admin-details',[AdminController::class,'updateAdminDetails']);
+        Route::match(['get', 'post'], '/update-admin-details', [AdminController::class, 'updateAdminDetails']);
 
         // Vendor Update Details
-        Route::match(['get','post'],'update-vendor-details/{slug}',[AdminController::class,'updateVendorDetails']);
+        Route::match(['get', 'post'], 'update-vendor-details/{slug}', [AdminController::class, 'updateVendorDetails']);
 
 
         // View Admins/ Subadmins/ Vendors
-        Route::get('admins/{type?}',[AdminController::class,'admins']);
+        Route::get('admins/{type?}', [AdminController::class, 'admins']);
 
+        // View vendor details
+        Route::get('view-vendor-details/{id}', [AdminController::class, 'viewVendorDetails']);
+
+        // Updata admin status
+        Route::post('update-admin-status', [AdminController::class, 'updateAdminStatus']);
 
         // Admin Logout
-        Route::get('/logout',[AdminController::class,'logout']);
+        Route::get('/logout', [AdminController::class, 'logout']);
     });
 });
