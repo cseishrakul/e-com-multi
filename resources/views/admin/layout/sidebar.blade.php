@@ -79,6 +79,23 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false"
+                    aria-controls="ui-basic6">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Catalouge</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic6">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/sections') }}">Sections</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/categories') }}">Categories</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/products') }}">Products</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         @endif
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"

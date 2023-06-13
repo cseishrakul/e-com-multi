@@ -16,4 +16,11 @@
 12. Lets fetch all admin details in admin dashboard;
 13. Lets see vendors all details from admin dashboard;
 14. Lets manage admin status from admin dashboard;
-15. Lets make countries database and with the help of this database lets select vendor's country + vendor's shop country; 
+15. Lets make countries database and with the help of this database lets select vendor's country + vendor's shop country;
+
+
+// Again Admin Work
+16. Lets create section datatable + model and show it in admin dashboard.In Section module lets have sections,category and product option;
+17. In section database lets put data with seeder and fetch them in dashboard section option and manage the status of every section + lets have datatable option in section table,so that we can search items easily;
+18. Lets do crud of section module;
+

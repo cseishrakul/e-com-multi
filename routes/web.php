@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Admin\SectionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,5 +58,14 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
         // Admin Logout
         Route::get('/logout', [AdminController::class, 'logout']);
+
+        // Section
+        Route::get('sections',[SectionController::class,'sections']);
+        Route::post('update-section-status',[SectionController::class,'updateSectionStatus']);
+        Route::get('delete-section/{id}',[SectionController::class,'deleteSection']);
+        Route::match(['get','post'],'add-edit-section/{id?}',[SectionController::class,'addEditSection']);
+
+        // CMS Pages
+        Route::get('cms-pages',[CmsController::class,'cmsPages']);
     });
 });

@@ -16,9 +16,8 @@ class SectionTableSeeder extends Seeder
     public function run()
     {
         $sectionRecord = [
-            ['id' => 1, 'name' => 'Clothing', 'status' => 1],
-            ['id' => 2, 'name' => 'Electronics', 'status' => 1],
-            ['id' => 3, 'name' => 'Appliances', 'status' => 1],
+            ['id' => 4, 'name' => 'Electronics', 'status' => 1],
+            ['id' => 5, 'name' => 'Appliances', 'status' => 1],
         ];
 
         Section::insert($sectionRecord);

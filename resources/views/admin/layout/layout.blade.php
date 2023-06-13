@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="{{asset('admin')}}/vendors/mdi/css/materialdesignicons.min.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{asset('admin')}}/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body>
@@ -63,6 +65,11 @@
     <script src="{{asset('admin')}}/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
     <script src="{{asset('admin')}}/js/custom.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
