@@ -16,7 +16,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center">Update Admin Details</h4>
+                            <h4 class="card-title text-center">Add New Section</h4>
                             <hr>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">

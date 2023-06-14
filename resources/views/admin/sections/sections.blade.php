@@ -26,8 +26,8 @@
                                         </button>
                                     </div>
                                 @endif
-                                <table class="table table-bordered table-striped text-center" id="example">
-                                    <thead>
+                                <table class="table table-bordered table-striped" id="section">
+                                    <thead class="">
                                         <tr>
                                             <th>
                                                 ID

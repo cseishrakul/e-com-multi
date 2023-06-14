@@ -4,7 +4,8 @@ $(document).ready(function () {
     // $(".nav-item").removeClass("active");
     // $(".nav-link").removeClass("active");
     // Check Admin password is correct or not
-    $("#example").DataTable();
+    $("#section").DataTable();
+    $("#categories").DataTable();
     $("#current_password").keyup(function () {
         var current_password = $("#current_password").val();
         // alert(current_password);
@@ -83,6 +84,36 @@ $(document).ready(function () {
                     );
                 } else if (resp["status"] == 1) {
                     $("#section-" + section_id).html(
+                        "<i class='mdi mdi-bookmark-check' style='font-size: 25px;'status='Active'></i>"
+                    );
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    // Update Category Status
+    $(document).on("click", ".updateCategoryStatus", function () {
+        var status = $(this).children("i").attr("status");
+        var category_id = $(this).attr("category_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "post",
+            url: "/admin/update-category-status",
+            data: { status: status, category_id: category_id },
+            success: function (resp) {
+                // alert(resp);
+                if (resp["status"] == 0) {
+                    $("#category-" + category_id).html(
+                        "<i class='mdi mdi-bookmark-outline' style='font-size: 25px;'status='Inactive'></i>"
+                    );
+                } else if (resp["status"] == 1) {
+                    $("#category-" + category_id).html(
                         "<i class='mdi mdi-bookmark-check' style='font-size: 25px;'status='Active'></i>"
                     );
                 }
