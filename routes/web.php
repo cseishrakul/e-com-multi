@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\SectionController;
@@ -70,6 +71,15 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('categories',[CategoryController::class,'categories']);
         Route::post('update-category-status',[CategoryController::class,'updateCategoryStatus']);
         Route::match(['get','post'],'add-edit-category/{id?}',[CategoryController::class,'addEditCategory']);
+        Route::get('append-categories-level',[CategoryController::class,'appendCategoriesLevel']);
+        Route::get('delete-category/{id}',[CategoryController::class,'deleteCategory']);
+        Route::get('delete-category-image/{id}',[CategoryController::class,'deleteCategoryImage']);
+
+        // Brands
+        Route::get('brands',[BrandController::class,'brands']);
+        Route::post('update-brand-status',[BrandController::class,'updateBrandStatus']);
+        Route::get('delete-brand/{id}',[BrandController::class,'deleteBrand']);
+        Route::match(['get','post'],'add-edit-brand/{id?}',[BrandController::class,'addEditBrand']);
 
         // CMS Pages
         Route::get('cms-pages',[CmsController::class,'cmsPages']);

@@ -9,11 +9,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="card-title">Categories</h4>
+                                    <h4 class="card-title">Brands</h4>
 
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ url('admin/add-edit-category/') }}" class="btn btn-info">Add Category</a>
+                                    <a href="{{ url('admin/add-edit-brand/') }}" class="btn btn-info">Add Brand</a>
                                 </div>
                             </div>
                             <hr>
@@ -26,23 +26,14 @@
                                         </button>
                                     </div>
                                 @endif
-                                <table class="table table-bordered table-striped" id="categories">
+                                <table class="table table-bordered table-striped" id="brand">
                                     <thead class="">
                                         <tr>
                                             <th>
                                                 ID
                                             </th>
                                             <th>
-                                                Category
-                                            </th>
-                                            <th>
-                                                Parent Category
-                                            </th>
-                                            <th>
-                                                Section
-                                            </th>
-                                            <th>
-                                                URL
+                                                Name
                                             </th>
                                             <th>
                                                 Status
@@ -53,55 +44,39 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
-
-                                        @if (isset($category['parentcategory']['category_name']) && !empty($category['parentcategory'] ['category_name']))
-                                            <?php $parent_category = $category['parentcategory']['category_name'] ?>
-                                        @else
-                                            <?php $parent_category = "Root"; ?>
-                                        @endif
-
+                                        @foreach ($brands as $brand)
                                             <tr>
                                                 <td>
-                                                    {{ $category['id'] }}
+                                                    {{ $brand['id'] }}
                                                 </td>
                                                 <td>
-                                                    {{ $category['category_name'] }}
+                                                    {{ $brand['name'] }}
                                                 </td>
                                                 <td>
-                                                    {{ $parent_category }}
-                                                </td>
-                                                <td>
-                                                    {{ $category['section']['name'] }}
-                                                </td>
-                                                <td>
-                                                    {{ $category['url'] }}
-                                                </td>
-                                                <td>
-                                                    @if ($category['status'] == '1')
-                                                        <a href="javascript:void(0)" class="updateCategoryStatus"
-                                                            id="category-{{ $category['id'] }}"
-                                                            category_id="{{ $category['id'] }}">
+                                                    @if ($brand['status'] == '1')
+                                                        <a href="javascript:void(0)" class="updateBrandStatus"
+                                                            id="brand-{{ $brand['id'] }}"
+                                                            brand_id="{{ $brand['id'] }}">
                                                             <i class="mdi mdi-bookmark-check" style="font-size: 25px;"
                                                                 status="Active"></i>
                                                         </a>
-                                                    @elseif($category['status'] == '0')
-                                                        <a href="javascript:void(0)" class="updateCategoryStatus"
-                                                            id="category-{{ $category['id'] }}"
-                                                            category_id="{{ $category['id'] }}">
+                                                    @elseif($brand['status'] == '0')
+                                                        <a href="javascript:void(0)" class="updateBrandStatus"
+                                                            id="brand-{{ $brand['id'] }}"
+                                                            brand_id="{{ $brand['id'] }}">
                                                             <i class="mdi mdi-bookmark-outline" style="font-size: 25px;"
                                                                 status="Inactive"></i>
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('admin/add-edit-category/' . $category['id']) }}"
+                                                    <a href="{{ url('admin/add-edit-brand/' . $brand['id']) }}"
                                                         class="">
                                                         <i class="mdi mdi-pencil-box" style="font-size: 25px;"></i>
                                                     </a>
 
-                                                    <a href="javascript:void(0)" class="confirmDelete" module="category"
-                                                        moduleid="{{ $category['id'] }}">
+                                                    <a href="javascript:void(0)" class="confirmDelete" module="brand"
+                                                        moduleid="{{ $brand['id'] }}">
                                                         <i class="mdi mdi-file-excel-box" style="font-size: 25px;"></i>
                                                     </a>
 

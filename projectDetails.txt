@@ -23,4 +23,5 @@
 16. Lets create section datatable + model and show it in admin dashboard.In Section module lets have sections,category and product option;
 17. In section database lets put data with seeder and fetch them in dashboard section option and manage the status of every section + lets have datatable option in section table,so that we can search items easily;
 18. Lets do crud of section module;
+19. Lets do crud of category module with subcategory as well;
 

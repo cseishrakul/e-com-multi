@@ -63,7 +63,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="section_id">Select Section</label>
-                                            <select name="section_id" id="section_id" class="form-control">
+                                            <select name="section_id" id="section_id" class="form-control" style="color:black">
                                                 <option value="">Select</option>
                                                 @foreach ($getSections as $section)
                                                     <option value="{{ $section['id'] }}" @if(!empty($category['section_id']) && $category['section_id'] == $section['id']) selected @endif>{{ $section['name'] }}</option>
@@ -136,10 +136,10 @@
                                             <input type="file" name="category_image" id="category_image"
                                                 class="form-control">
 
-                                            {{-- @if (!empty(Auth::guard('admin')->user()->image))
-                                                <a target="_blank" href="{{url('admin/photos/category_images/'.Auth::guard('admin')->user()->image)}}"  class="">View Image</a>
-                                                <input type="hidden" name="current_category_image" value="{{Auth::guard('admin')->user()->image}}">
-                                            @endif --}}
+                                            @if (!empty($category['category_image']))
+                                                <a target="_blank" href="{{url('admin/photos/category_images/'.$category['category_image'])}}"  class="">View Image</a>&nbsp;|&nbsp;
+                                                <a href="javascript:void(0)" class="confirmDelete" module="category-image" moduleid="{{$category['id']}}">Delete Image</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

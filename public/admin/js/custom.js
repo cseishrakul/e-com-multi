@@ -6,6 +6,7 @@ $(document).ready(function () {
     // Check Admin password is correct or not
     $("#section").DataTable();
     $("#categories").DataTable();
+    $("#brand").DataTable();
     $("#current_password").keyup(function () {
         var current_password = $("#current_password").val();
         // alert(current_password);
@@ -124,6 +125,36 @@ $(document).ready(function () {
         });
     });
 
+    // Update Brand Status
+    $(document).on("click", ".updateBrandStatus", function () {
+        var status = $(this).children("i").attr("status");
+        var brand_id = $(this).attr("brand_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "post",
+            url: "/admin/update-brand-status",
+            data: { status: status, brand_id: brand_id },
+            success: function (resp) {
+                // alert(resp);
+                if (resp["status"] == 0) {
+                    $("#brand-" + brand_id).html(
+                        "<i class='mdi mdi-bookmark-outline' style='font-size: 25px;'status='Inactive'></i>"
+                    );
+                } else if (resp["status"] == 1) {
+                    $("#brand-" + brand_id).html(
+                        "<i class='mdi mdi-bookmark-check' style='font-size: 25px;'status='Active'></i>"
+                    );
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
     // Confirm Section Delete
     // $(".confirmDelete").click(function () {
     //     var title = $(this).attr("title");
@@ -134,9 +165,9 @@ $(document).ready(function () {
     //     }
     // });
 
-    // confirm section delete with sweetalert
+    // confirm delete with sweetalert
     $(".confirmDelete").click(function () {
-        var module = $(this).attr('module');
+        var module = $(this).attr("module");
         var moduleid = $(this).attr("moduleid");
 
         Swal.fire({
@@ -145,16 +176,32 @@ $(document).ready(function () {
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
-            confirmButtonText: "Delete"
+            confirmButtonText: "Delete",
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    "Deleted", 
-                    "Your file has been deleted", 
-                    "success"
-                    )
-                window.location = "/admin/delete-"+module+"/"+moduleid;
+                Swal.fire("Deleted", "Your file has been deleted", "success");
+                window.location = "/admin/delete-" + module + "/" + moduleid;
             }
+        });
+    });
+
+    // Append Categories Level
+    $("#section_id").change(function () {
+        var section_id = $(this).val();
+        // alert(section_id);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "get",
+            url: "/admin/append-categories-level",
+            data: { section_id: section_id },
+            success: function (resp) {
+                $("#appendCategoryLevel").html(resp);
+            },
+            error: function () {
+                alert("Error");
+            },
         });
     });
 });
