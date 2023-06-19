@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,15 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-brand-status',[BrandController::class,'updateBrandStatus']);
         Route::get('delete-brand/{id}',[BrandController::class,'deleteBrand']);
         Route::match(['get','post'],'add-edit-brand/{id?}',[BrandController::class,'addEditBrand']);
+
+
+        // Products
+        Route::get('products',[ProductController::class,'products']);
+        Route::post('update-product-status',[ProductController::class,'updateProductStatus']);
+        Route::get('delete-product/{id}',[ProductController::class,'deleteProduct']);
+        Route::match(['get','post'],'add-edit-product/{id?}',[ProductController::class,'addEditProduct']);
+
+
 
         // CMS Pages
         Route::get('cms-pages',[CmsController::class,'cmsPages']);

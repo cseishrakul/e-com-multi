@@ -1,3 +1,12 @@
+/* 
+
+    Packages : {
+        Breeze, Intervention
+    }
+
+*/
+
+
 1. Lets install laravel.
 2. Lets install breeze in project for authentication.
 3. Lets Merge Admin dashboard;
@@ -24,4 +33,5 @@
 17. In section database lets put data with seeder and fetch them in dashboard section option and manage the status of every section + lets have datatable option in section table,so that we can search items easily;
 18. Lets do crud of section module;
 19. Lets do crud of category module with subcategory as well;
+20. Lets do crud of brand module;
 
