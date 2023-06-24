@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductsAttribute;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(CmsPagesTableSeeder::class);
         // $this->call(CategoryTableSeeder::class);
         // $this->call(BrandTableSeeder::class);
-        $this->call(ProductTableSeeder::class);
+        // $this->call(ProductTableSeeder::class);
+        $this->call(ProductsAttributeTableSeeder::class);
     }
 }

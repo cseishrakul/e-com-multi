@@ -6,8 +6,14 @@
             <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="row">
-                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <div class="col-6 col-xl-6 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">Add New / Edit Product</h3>
+                        </div>
+                        <div class="col-6 col-xl-6 mb-4 mb-xl-0">
+                            <h3 class="text-right">
+                                <a href="{{ url('admin/products') }}" class="btn btn-info">All Products</a>
+                            </h3>
+
                         </div>
                     </div>
                 </div>
@@ -47,8 +53,8 @@
                                     </button>
                                 </div>
                             @endif
-                            <form
-                                class="forms-sample" @if (empty($product['id'])) action="{{ url('admin/add-edit-product') }}" @else action="{{ url('admin/add-edit-product/' . $product['id']) }}" @endif
+                            <form class="forms-sample"
+                                @if (empty($product['id'])) action="{{ url('admin/add-edit-product') }}" @else action="{{ url('admin/add-edit-product/' . $product['id']) }}" @endif
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -61,10 +67,12 @@
                                                 @foreach ($categories as $section)
                                                     <optgroup label="{{ $section['name'] }}"></optgroup>
                                                     @foreach ($section['categories'] as $category)
-                                                        <option value="{{ $category['id'] }}">&nbsp; &nbsp; --
+                                                        <option @if (!empty($product['category_id'] == $category['id'])) selected @endif
+                                                            value="{{ $category['id'] }}">&nbsp; &nbsp; --
                                                             &nbsp;{{ $category['category_name'] }}</option>
                                                         @foreach ($category['subcategories'] as $subcategories)
-                                                            <option value="{{ $subcategories['id'] }}"> &nbsp;
+                                                            <option @if (!empty($product['category_id'] == $subcategories['id'])) selected @endif
+                                                                value="{{ $subcategories['id'] }}"> &nbsp;
                                                                 &nbsp;&nbsp; &nbsp; --&nbsp;
                                                                 &nbsp;{{ $subcategories['category_name'] }} </option>
                                                         @endforeach
@@ -79,7 +87,8 @@
                                             <select name="brand_id" id="brand_id" class="form-control" style="color:black">
                                                 <option value="">Select</option>
                                                 @foreach ($brands as $brand)
-                                                    <option value="{{ $brand['id'] }}"> {{ $brand['name'] }} </option>
+                                                    <option @if (!empty($product['brand_id'] == $brand['id'])) selected @endif
+                                                        value="{{ $brand['id'] }}"> {{ $brand['name'] }} </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -124,7 +133,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Product Description</label>
-                                            <textarea name="description" id="description" rows="3" class="form-control"></textarea>
+                                            <textarea name="description" id="description" rows="3" class="form-control"> {{ $product['description'] }} </textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -174,13 +183,13 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="product_image">Product  (Recommend Size: 1000 x 1000 )</label>
+                                            <label for="product_image">Product Image (Recommend Size: 1000 x 1000 )</label>
                                             <input type="file" name="product_image" id="product_image"
                                                 class="form-control">
 
                                             @if (!empty($product['product_image']))
                                                 <a target="_blank"
-                                                    href="{{ url('admin/photos/product_images/' . $product['product_image']) }}"
+                                                    href="{{ url('admin/photos/product_images/large/' . $product['product_image']) }}"
                                                     class="">View Image</a>&nbsp;|&nbsp;
                                                 <a href="javascript:void(0)" class="confirmDelete" module="product-image"
                                                     moduleid="{{ $product['id'] }}">Delete Image</a>
@@ -189,7 +198,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="product_video">Product Video (Recommend Size: Less theb 2M )</label>
+                                            <label for="product_video">Product Video (Recommend Size: Less theb 2M
+                                                )</label>
                                             <input type="file" name="product_video" id="product_video"
                                                 class="form-control">
 
@@ -198,13 +208,14 @@
                                                     href="{{ url('admin/videos/product_video/' . $product['product_video']) }}"
                                                     class="">View Video</a>&nbsp;|&nbsp;
                                                 <a href="javascript:void(0)" class="confirmDelete" module="product-video"
-                                                    moduleid="{{ $product['id'] }}">Delete Image</a>
+                                                    moduleid="{{ $product['id'] }}">Delete Video</a>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mt-5">
-                                            <label for="is_featured" style="font-size: 15px;font-weight:bold">Featured Item</label>
+                                            <label for="is_featured" style="font-size: 15px;font-weight:bold">Featured
+                                                Item</label>
                                             <input type="checkbox" name="is_featured" id="is_featured" value="Yes"
                                                 class="" @if (!empty($product['is_featured']) && $product['is_featured'] == 'Yes') checked @endif>
                                         </div>

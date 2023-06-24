@@ -1,10 +1,9 @@
 @extends('admin.layout.layout')
-
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
-                <div class="col-lg-12 grid-margin stretch-card">
+                <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -17,7 +16,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="table-responsive pt-3">
+                            <div class="table-responsive mt-3">
                                 @if (Session::has('success_message'))
                                     <div class="alert alert-success alert-dismissable fade show" role="alert">
                                         <strong>Success:</strong> {{ Session::get('success_message') }}
@@ -26,23 +25,23 @@
                                         </button>
                                     </div>
                                 @endif
-                                <table class="table table-bordered table-striped" id="products">
+                                <table class="table table-striped table-bordered" id="products">
                                     <thead class="">
                                         <tr>
                                             <th>
                                                 ID
                                             </th>
                                             <th>
-                                                Product Name
+                                                Name
                                             </th>
                                             <th>
-                                                Product Color
+                                                Color
                                             </th>
                                             <th>
-                                                Product Code
+                                                Code
                                             </th>
                                             <th>
-                                                Product Image
+                                                Image
                                             </th>
                                             <th>
                                                 Category
@@ -79,9 +78,9 @@
                                                 </td>
                                                 <td>
                                                     @if (!empty($product['product_image']))
-                                                        <img style="width: 80px; height:70px;" src="{{asset('admin/photos/product_images/small/'.$product['product_image'])}}" alt="" class="">
+                                                        <img style="" src="{{asset('admin/photos/product_images/small/'.$product['product_image'])}}" alt="" class="">
                                                     @else 
-                                                    <img style="width: 80px; height:70px;" src="{{asset('admin/photos/product_images/small/no-image.png')}}" alt="">
+                                                    <img style="" src="{{asset('admin/photos/product_images/small/no-image.png')}}" alt="">
                                                     @endif
                                                 </td>
                                                 <td>
@@ -115,9 +114,19 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('admin/add-edit-product/' . $product['id']) }}"
+                                                    <a title="Edit Product" href="{{ url('admin/add-edit-product/' . $product['id']) }}"
                                                         class="">
                                                         <i class="mdi mdi-pencil-box" style="font-size: 25px;"></i>
+                                                    </a>
+
+                                                    <a title="Add Attributes" href="{{ url('admin/add-edit-attributes/' . $product['id']) }}"
+                                                        class="">
+                                                        <i class="mdi mdi-plus-box" style="font-size: 25px;"></i>
+                                                    </a>
+
+                                                    <a title="Add Multiple Images" href="{{ url('admin/add-images/' . $product['id']) }}"
+                                                        class="">
+                                                        <i class="mdi mdi-library-plus" style="font-size: 25px;"></i>
                                                     </a>
 
                                                     <a href="javascript:void(0)" class="confirmDelete" module="product"

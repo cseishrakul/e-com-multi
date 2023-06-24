@@ -88,6 +88,18 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-product-status',[ProductController::class,'updateProductStatus']);
         Route::get('delete-product/{id}',[ProductController::class,'deleteProduct']);
         Route::match(['get','post'],'add-edit-product/{id?}',[ProductController::class,'addEditProduct']);
+        Route::get('delete-product-image/{id}',[ProductController::class,'deleteProductImage']);
+        Route::get('delete-product-video/{id}',[ProductController::class,'deleteProductVideo']);
+
+        // Multiple Image add in products
+        Route::match(['get','post'],'add-images/{id}',[ProductController::class,'multipleImage']);
+        Route::post('update-images-status',[ProductController::class,'updateImagesStatus']);
+        Route::get('delete-image/{id}',[ProductController::class,'deleteProductImages']);
+
+        // Attributs
+        Route::match(['get','post'],'add-edit-attributes/{id}',[ProductController::class,'addAttributes']);
+        Route::post('update-attribute-status',[ProductController::class,'updateAttributeStatus']);
+        Route::match(['get','post'],'edit-attributes/{id}',[ProductController::class,'editAttributes']);
 
 
 

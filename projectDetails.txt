@@ -34,4 +34,6 @@
 18. Lets do crud of section module;
 19. Lets do crud of category module with subcategory as well;
 20. Lets do crud of brand module;
+21. Lets do crud of product module;
+22. Lets have product attribute module and crud it;
 

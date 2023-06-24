@@ -188,6 +188,66 @@ $(document).ready(function () {
         });
     });
 
+    // Update Attributes Status
+    $(document).on("click", ".updateAttributeStatus", function () {
+        var status = $(this).children("i").attr("status");
+        var attribute_id = $(this).attr("attribute_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "post",
+            url: "/admin/update-attribute-status",
+            data: { status: status, attribute_id: attribute_id },
+            success: function (resp) {
+                // alert(resp);
+                if (resp["status"] == 0) {
+                    $("#attribute-" + attribute_id).html(
+                        "<i class='mdi mdi-bookmark-outline' style='font-size: 25px;'status='Inactive'></i>"
+                    );
+                } else if (resp["status"] == 1) {
+                    $("#attribute-" + attribute_id).html(
+                        "<i class='mdi mdi-bookmark-check' style='font-size: 25px;'status='Active'></i>"
+                    );
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    // Update Images Status
+    $(document).on("click", ".updateImageStatus", function () {
+        var status = $(this).children("i").attr("status");
+        var image_id = $(this).attr("image_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "post",
+            url: "/admin/update-images-status",
+            data: { status: status, image_id: image_id },
+            success: function (resp) {
+                // alert(resp);
+                if (resp["status"] == 0) {
+                    $("#image-" + image_id).html(
+                        "<i class='mdi mdi-bookmark-outline' style='font-size: 25px;'status='Inactive'></i>"
+                    );
+                } else if (resp["status"] == 1) {
+                    $("#image-" + image_id).html(
+                        "<i class='mdi mdi-bookmark-check' style='font-size: 25px;'status='Active'></i>"
+                    );
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
     // Confirm Section Delete
     // $(".confirmDelete").click(function () {
     //     var title = $(this).attr("title");
@@ -236,5 +296,28 @@ $(document).ready(function () {
                 alert("Error");
             },
         });
+    });
+
+    // Procut Attributes add remove input field dynamic
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div><input type="text" name="size[]" placeholder="Size"/>&nbsp;<input type="text" name="sku[]" placeholder="SKU"/>&nbsp;<input type="text" name="price[]" placeholder="Price"/>&nbsp;<input type="text" name="stock[]" placeholder="Stock"/>&nbsp;<a href="javascript:void(0);" class="remove_button"><i class="mdi mdi-minus-box" style="font-size: 25px;"></i></a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
     });
 });
