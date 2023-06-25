@@ -36,4 +36,5 @@
 20. Lets do crud of brand module;
 21. Lets do crud of product module;
 22. Lets have product attribute module and crud it;
+23. Lets have product images module and crud it.With the help of this module lets have multiple image of product.
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Front\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,6 @@ require __DIR__ . '/auth.php';
 
 
 // Admin Route Group
-
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
     // Admin Login
     Route::match(['get', 'post'], '/login', [AdminController::class, 'login']);
@@ -107,3 +107,10 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('cms-pages',[CmsController::class,'cmsPages']);
     });
 });
+// End Admin Route Group
+
+// Frontend Route Group
+Route::namespace('App\Http\Controllers\Front')->group(function(){
+    Route::get('/',[IndexController::class,'index']);
+});
+// End Frontend Route Group

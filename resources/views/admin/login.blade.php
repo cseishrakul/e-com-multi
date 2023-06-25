@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
+    <title>iCode Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('admin') }}/vendors/feather/feather.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/vendors/ti-icons/css/themify-icons.css">
@@ -27,10 +27,11 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                             <div class="brand-logo">
-                                <img src="{{ asset('admin') }}/images/logo.svg" alt="logo">
+                                {{-- <img src="{{ asset('admin') }}/images/logo.svg" alt="logo"> --}}
+                                <h2 class="">iCode</h2>
                             </div>
                             <h4>Hello! let's get started</h4>
-                            <h6 class="font-weight-light">Sign in to continue.</h6>
+                            <h6 class="font-weight-light">Admin Sign in</h6>
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <strong>Error: </strong> {{ Session::get('error_message') }}
@@ -74,11 +75,11 @@
                                     </div>
                                     <a href="#" class="auth-link text-black">Forgot password?</a>
                                 </div>
-                                <div class="mb-2">
+                                {{-- <div class="mb-2">
                                     <button type="button" class="btn btn-block btn-facebook auth-form-btn">
                                         <i class="ti-facebook mr-2"></i>Connect using facebook
                                     </button>
-                                </div>
+                                </div> --}}
                                 <div class="text-center mt-4 font-weight-light">
                                     Don't have an account? <a href="register.html" class="text-primary">Create</a>
                                 </div>
