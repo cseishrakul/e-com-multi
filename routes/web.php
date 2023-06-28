@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
@@ -101,7 +102,10 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-attribute-status',[ProductController::class,'updateAttributeStatus']);
         Route::match(['get','post'],'edit-attributes/{id}',[ProductController::class,'editAttributes']);
 
-
+        // Banner
+        Route::get('banners',[BannerController::class,'banners']);
+        Route::post('update-banner-status',[BannerController::class,'updateBannerStatus']);
+        Route::get('delete-banner/{id}',[BannerController::class,'deleteBanner']);
 
         // CMS Pages
         Route::get('cms-pages',[CmsController::class,'cmsPages']);

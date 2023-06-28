@@ -98,6 +98,19 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false"
+                    aria-controls="ui-basic7">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Banners</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic7">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/banners') }}">Slider Banners</a></li>
+                    </ul>
+                </div>
+            </li>
         @endif
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"

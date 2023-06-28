@@ -33,8 +33,18 @@
 17. In section database lets put data with seeder and fetch them in dashboard section option and manage the status of every section + lets have datatable option in section table,so that we can search items easily;
 18. Lets do crud of section module;
 19. Lets do crud of category module with subcategory as well;
+    19.1: Every Category is under Section.So thats why lets make relation between category and section in Category model.
+    19.2: Every Subcategory is under Category.So thats why lets make relation between category and subcategory with the help of parentcategory option.
+    19.3: For Select subcategory lets have the help of ajax;
+
 20. Lets do crud of brand module;
 21. Lets do crud of product module;
 22. Lets have product attribute module and crud it;
 23. Lets have product images module and crud it.With the help of this module lets have multiple image of product.
 
+
+
+// Lets work with frontend
+1. Lets merge frontend template;
+2. Fetch all section category subcategory and show them in home page;
+3. 
