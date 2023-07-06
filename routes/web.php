@@ -106,6 +106,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('banners',[BannerController::class,'banners']);
         Route::post('update-banner-status',[BannerController::class,'updateBannerStatus']);
         Route::get('delete-banner/{id}',[BannerController::class,'deleteBanner']);
+        Route::match(['get','post'],'add-edit-banner/{id?}',[BannerController::class,'addEditBanner']);
 
         // CMS Pages
         Route::get('cms-pages',[CmsController::class,'cmsPages']);

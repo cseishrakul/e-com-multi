@@ -2,32 +2,37 @@
 @section('content')
     <div class="default-height ph-item">
         <div class="slider-main owl-carousel">
-            <div class="bg-image">
-                <div class="slide-content">
-                    <h1><img src="{{asset('front')}}/images/banners/banner-1.png"></h1>
-                    <h2>Spring Collection</h2>
+            @foreach ($sliderBanners as $sliderBanner)
+                <div class="bg-image">
+                    <div class="slide-content">
+                        <h1>
+                            <a @if (!empty($sliderBanner['link'])) href="{{ url($sliderBanner['link']) }}" @else href="javascript::" @endif
+                                class="">
+                                <img title="{{$sliderBanner['title']}}" alt="{{$sliderBanner['title']}}" src="{{ asset('admin/photos/banner_images/' . $sliderBanner['image']) }}" />
+                            </a>
+                        </h1>
+                        <h2>{{$sliderBanner['title']}}</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-image">
-                <div class="slide-content">
-                    <h1><img src="{{asset('front')}}/images/banners/banner-2.png"></h1>
-                    <h2>Summer Collection</h2>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <!-- Main-Slider /- -->
     <!-- Banner-Layer -->
-    <div class="banner-layer">
+    @if (isset($fixBanners[0]['image']))
+        <div class="banner-layer">
         <div class="container">
             <div class="image-banner">
-                <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers"
+                <a target="_blank" rel="nofollow" href="{{url($fixBanners[0]['link'])}}"
                     class="mx-auto banner-hover effect-dark-opacity">
-                    <img class="img-fluid" src="{{asset('front')}}/images/banners/stack-developers.png" alt="Winter Season Banner">
+                    <img class="img-fluid" src="{{ asset('admin/photos/banner_images/'.$fixBanners[0]['image']) }}"
+                        alt="{{$fixBanners[0]['alt']}}" title="{{$fixBanners[0]['title']}}">
                 </a>
             </div>
         </div>
     </div>
+    @endif
+    
     <!-- Banner-Layer /- -->
     <!-- Top Collection -->
     <section class="section-maker">
@@ -58,7 +63,8 @@
                                     <div class="item">
                                         <div class="image-container">
                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                <img class="img-fluid" src="{{asset('front')}}/images/product/product@3x.jpg" alt="Product">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('front') }}/images/product/product@3x.jpg" alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
@@ -101,7 +107,8 @@
                                     <div class="item">
                                         <div class="image-container">
                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                <img class="img-fluid" src="{{asset('front')}}/images/product/product@3x.jpg" alt="Product">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('front') }}/images/product/product@3x.jpg" alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
@@ -141,7 +148,8 @@
                                     <div class="item">
                                         <div class="image-container">
                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                <img class="img-fluid" src="{{asset('front')}}/images/product/product@3x.jpg"
+                                                <img class="img-fluid"
+                                                    src="{{ asset('front') }}/images/product/product@3x.jpg"
                                                     alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
@@ -183,7 +191,8 @@
                                     <div class="item">
                                         <div class="image-container">
                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                <img class="img-fluid" src="{{asset('front')}}/images/product/product@3x.jpg"
+                                                <img class="img-fluid"
+                                                    src="{{ asset('front') }}/images/product/product@3x.jpg"
                                                     alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
@@ -228,7 +237,8 @@
                                     <div class="item">
                                         <div class="image-container">
                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                <img class="img-fluid" src="{{asset('front')}}/images/product/product@3x.jpg"
+                                                <img class="img-fluid"
+                                                    src="{{ asset('front') }}/images/product/product@3x.jpg"
                                                     alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
@@ -1129,16 +1139,19 @@
     </section>
     <!-- Top Collection /- -->
     <!-- Banner-Layer -->
+    @if (isset($fixBanners[1]['image']))
     <div class="banner-layer">
-        <div class="container">
-            <div class="image-banner">
-                <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers"
-                    class="mx-auto banner-hover effect-dark-opacity">
-                    <img class="img-fluid" src="images/banners/stack-developers.png" alt="Winter Season Banner">
-                </a>
-            </div>
+    <div class="container">
+        <div class="image-banner">
+            <a target="_blank" rel="nofollow" href="{{url($fixBanners[1]['link'])}}"
+                class="mx-auto banner-hover effect-dark-opacity">
+                <img class="img-fluid" src="{{ asset('admin/photos/banner_images/'.$fixBanners[1]['image']) }}"
+                    alt="{{$fixBanners[1]['alt']}}" title="{{$fixBanners[1]['title']}}">
+            </a>
         </div>
     </div>
+</div>
+@endif
     <!-- Banner-Layer /- -->
     <!-- Site-Priorities -->
     <section class="app-priority">

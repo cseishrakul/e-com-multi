@@ -9,7 +9,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="card-title">Banners</h4>
+                                    <h4 class="card-title">Home Page Banners</h4>
 
                                 </div>
                                 <div class="col-md-6 text-right">
@@ -36,6 +36,9 @@
                                                 Image
                                             </th>
                                             <th>
+                                                Type
+                                            </th>
+                                            <th>
                                                 Link
                                             </th>
                                             <th>
@@ -60,6 +63,9 @@
                                                 </td>
                                                 <td>
                                                     <img src="{{asset('admin/photos/banner_images/'.$banner['image'])}}" alt="" class="">
+                                                </td>
+                                                <td>
+                                                    {{ $banner['type'] }}
                                                 </td>
                                                 <td>
                                                     {{ $banner['link'] }}
