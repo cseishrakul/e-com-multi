@@ -10,7 +10,6 @@ $(document).ready(function () {
     $("#products").DataTable();
     $("#banner").DataTable();
 
-
     $("#current_password").keyup(function () {
         var current_password = $("#current_password").val();
         // alert(current_password);
@@ -289,7 +288,7 @@ $(document).ready(function () {
     // });
 
     // confirm delete with sweetalert
-    $(".confirmDelete").click(function () {
+    $(document).on("click", ".confirmDelete", function () {
         var module = $(this).attr("module");
         var moduleid = $(this).attr("moduleid");
 
@@ -330,24 +329,25 @@ $(document).ready(function () {
 
     // Procut Attributes add remove input field dynamic
     var maxField = 10; //Input fields increment limitation
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div><input type="text" name="size[]" placeholder="Size"/>&nbsp;<input type="text" name="sku[]" placeholder="SKU"/>&nbsp;<input type="text" name="price[]" placeholder="Price"/>&nbsp;<input type="text" name="stock[]" placeholder="Stock"/>&nbsp;<a href="javascript:void(0);" class="remove_button"><i class="mdi mdi-minus-box" style="font-size: 25px;"></i></a></div>'; //New input field html 
+    var addButton = $(".add_button"); //Add button selector
+    var wrapper = $(".field_wrapper"); //Input field wrapper
+    var fieldHTML =
+        '<div><input type="text" name="size[]" placeholder="Size"/>&nbsp;<input type="text" name="sku[]" placeholder="SKU"/>&nbsp;<input type="text" name="price[]" placeholder="Price"/>&nbsp;<input type="text" name="stock[]" placeholder="Stock"/>&nbsp;<a href="javascript:void(0);" class="remove_button"><i class="mdi mdi-minus-box" style="font-size: 25px;"></i></a></div>'; //New input field html
     var x = 1; //Initial field counter is 1
-    
+
     //Once add button is clicked
-    $(addButton).click(function(){
+    $(addButton).click(function () {
         //Check maximum number of input fields
-        if(x < maxField){ 
+        if (x < maxField) {
             x++; //Increment field counter
             $(wrapper).append(fieldHTML); //Add field html
         }
     });
-    
+
     //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e){
+    $(wrapper).on("click", ".remove_button", function (e) {
         e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
+        $(this).parent("div").remove(); //Remove field html
         x--; //Decrement field counter
     });
 });

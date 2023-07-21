@@ -51,3 +51,8 @@
 1. Lets merge frontend template;
 2. Fetch all section category subcategory and show them in home page;
 3. Fetch all banner and show them in home page;
+4. Lets fetch New Arrivals products in home page;
+5. Lets fetch Best Seller products in home page;
+6. Lets fetch Discounted products in home page;
+7. Lets fetch featured products in home page;
+8. Lets listing products by its category subcategories in frontend;

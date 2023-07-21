@@ -212,12 +212,19 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <div class="form-group mt-5">
                                             <label for="is_featured" style="font-size: 15px;font-weight:bold">Featured
                                                 Item</label>
                                             <input type="checkbox" name="is_featured" id="is_featured" value="Yes"
                                                 class="" @if (!empty($product['is_featured']) && $product['is_featured'] == 'Yes') checked @endif>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group mt-5">
+                                            <label for="is_bestseller" style="font-size: 15px;font-weight:bold">Best Seller Item</label>
+                                            <input type="checkbox" name="is_bestseller" id="is_bestseller" value="Yes"
+                                                class="" @if (!empty($product['is_bestseller']) && $product['is_bestseller'] == 'Yes') checked @endif>
                                         </div>
                                     </div>
                                 </div>

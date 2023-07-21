@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\Front\ProductController as FrontProductController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -117,5 +119,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 // Frontend Route Group
 Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('/',[IndexController::class,'index']);
+
+    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+    // dd($catUrls);die;
+    foreach($catUrls as $key => $url){
+        Route::get('/'.$url,[FrontProductController::class,'listing']);
+    }
 });
 // End Frontend Route Group
