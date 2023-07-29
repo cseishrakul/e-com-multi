@@ -56,3 +56,5 @@
 6. Lets fetch Discounted products in home page;
 7. Lets fetch featured products in home page;
 8. Lets listing products by its category subcategories in frontend;
+9. Lets filter product by sort of highest price low price new products with and without ajax;
+10. 

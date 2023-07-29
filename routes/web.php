@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Front\IndexController;
@@ -104,6 +105,12 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-attribute-status',[ProductController::class,'updateAttributeStatus']);
         Route::match(['get','post'],'edit-attributes/{id}',[ProductController::class,'editAttributes']);
 
+        // Product Filter
+        Route::get('filters',[FilterController::class,'filters']);
+        Route::post('update-filter-status',[FilterController::class,'updateFilterStatus']);
+        Route::get('filter-values',[FilterController::class,'filterValues']);
+        Route::post('update-filter-value-status',[FilterController::class,'updateFilterValueStatus']);
+
         // Banner
         Route::get('banners',[BannerController::class,'banners']);
         Route::post('update-banner-status',[BannerController::class,'updateBannerStatus']);
@@ -123,7 +130,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
     // dd($catUrls);die;
     foreach($catUrls as $key => $url){
-        Route::get('/'.$url,[FrontProductController::class,'listing']);
+        Route::match(['get','post'],'/'.$url,[FrontProductController::class,'listing']);
     }
 });
 // End Frontend Route Group

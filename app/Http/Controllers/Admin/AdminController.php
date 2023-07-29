@@ -49,7 +49,7 @@ class AdminController extends Controller
     // dashboard function
     public function dashboard()
     {
-        Session::put('page','dashboard');
+        Session::put('page', 'dashboard');
         return view('admin.dashboard');
     }
 
@@ -271,8 +271,8 @@ class AdminController extends Controller
         } else {
         }
 
-        $countries = Country::where('status',1)->get()->toArray();
-        return view('admin.settings.vendor.update_vendor_details', compact('slug', 'vendorDetails','countries'));
+        $countries = Country::where('status', 1)->get()->toArray();
+        return view('admin.settings.vendor.update_vendor_details', compact('slug', 'vendorDetails', 'countries'));
     }
 
 
@@ -294,24 +294,25 @@ class AdminController extends Controller
     // View Vendor details function
     public function viewVendorDetails($id)
     {
-        $vendorDetails = Admin::with('vendorPersonal','vendorBusiness','vendorBank')->where('id',$id)->first();
-        $vendorDetails = json_decode(json_encode($vendorDetails),true);
+        $vendorDetails = Admin::with('vendorPersonal', 'vendorBusiness', 'vendorBank')->where('id', $id)->first();
+        $vendorDetails = json_decode(json_encode($vendorDetails), true);
         // dd($vendorDetails);
-        return view('admin.admins.vendor.view_vendor_details',compact('vendorDetails'));
+        return view('admin.admins.vendor.view_vendor_details', compact('vendorDetails'));
     }
 
     // Update admin statue
-    public function updateAdminStatus(Request $request){
-        if($request->ajax()){
+    public function updateAdminStatus(Request $request)
+    {
+        if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data);die;
-            if($data['status'] == 'Active'){
+            if ($data['status'] == 'Active') {
                 $status = 0;
-            }else{
+            } else {
                 $status = 1;
             }
-            Admin::where('id',$data['admin_id'])->update(['status' => $status]);
-            return response()->json(['status' => $status,'admin_id' => $data['admin_id']]);
+            Admin::where('id', $data['admin_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status, 'admin_id' => $data['admin_id']]);
         }
     }
 
