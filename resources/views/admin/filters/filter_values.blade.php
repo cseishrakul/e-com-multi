@@ -14,7 +14,7 @@
                                     <a href="{{ url('admin/filters/') }}" class="btn btn-info">View Filters</a>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ url('admin/add-edit-brand/') }}" class="btn btn-info">Add Filters Value</a>
+                                    <a href="{{ url('admin/add-edit-filter-value/') }}" class="btn btn-info">Add Filters Value</a>
                                 </div>
                             </div>
                             <hr>

@@ -80,6 +80,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="loadFilters">
+                                            @include('admin.filters.category_filter')
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">

@@ -110,6 +110,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-filter-status',[FilterController::class,'updateFilterStatus']);
         Route::get('filter-values',[FilterController::class,'filterValues']);
         Route::post('update-filter-value-status',[FilterController::class,'updateFilterValueStatus']);
+        Route::match(['get','post'],'add-edit-filter/{id?}',[FilterController::class,'addEditFilter']);
+        Route::match(['get','post'],'add-edit-filter-value/{id?}',[FilterController::class,'addEditFilterValue']);
+        Route::post('category-filters',[FilterController::class,'categoryFilters']);
 
         // Banner
         Route::get('banners',[BannerController::class,'banners']);

@@ -45,6 +45,10 @@
 22. Lets have product attribute module and crud it;
 23. Lets have product images module and crud it.With the help of this module lets have multiple image of product.
 24. Lets have banner section in admin dashboard & do crud it;
+25. Lets have product filter so that customer can find his products easily.For that lets have 2 db table call product filter & product filter value. And crud them with the help of FilterController;
+
+26. Now lets have those filter columns in product table and select every column's data by select option while we add a new product in db;
+
 
 
 // Lets work with frontend

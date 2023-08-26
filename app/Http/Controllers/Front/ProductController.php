@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductsAttribute;
+use App\Models\ProductsFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,13 @@ class ProductController extends Controller
                 $categoryDetails = Category::categoryDetails($url);
                 $categoryProducts = Product::with('brand')->whereIn('category_id', $categoryDetails['catIds'])->where('status', 1);
 
+                // Checking for dynamic filters
+                $productFilters = ProductsFilter::productFilters();
+                foreach ($productFilters as $key => $filter) {
+                    if (isset($filter['filter_column']) && isset($data[$filter['filter_column']]) && !empty($filter['filter_column']) && !empty($data[$filter['filter_column']])) {
+                        $categoryProducts->whereIn($filter['filter_column'],$data[$filter['filter_column']]);
+                    }
+                }
                 // Checking the sort
                 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
                     if ($_GET['sort'] == 'product_latest') {
@@ -37,6 +46,18 @@ class ProductController extends Controller
                     } else if ($_GET['sort'] == 'name_a_z') {
                         $categoryProducts->orderby('products.product_name', 'Asc');
                     }
+                }
+
+                // Checking the size
+                if(isset($data['size']) && !empty($data['size'])){
+                    $productIds = ProductsAttribute::select('product_id')->whereIn('size',$data['size'])->pluck('product_id')->toArray();
+                    $categoryProducts->whereIn('products.id',$productIds);
+                }
+
+                // Checking the color
+                if(isset($data['color']) && !empty($data['color'])){
+                    $productIds = Product::select('id')->whereIn('product_color',$data['color'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id',$productIds);
                 }
 
                 $categoryProducts = $categoryProducts->paginate(30);

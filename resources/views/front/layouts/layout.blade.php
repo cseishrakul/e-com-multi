@@ -124,5 +124,7 @@ ga('send', 'pageview')
 <script type="text/javascript" src="{{asset('front')}}/js/app.js"></script>
 {{-- Custom Js --}}
 <script type="text/javascript" src="{{asset('front')}}/js/custom.js"></script>
+
+@include('front.layouts.script')
 </body>
 </html>
