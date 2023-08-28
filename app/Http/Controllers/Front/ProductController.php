@@ -30,7 +30,7 @@ class ProductController extends Controller
                 $productFilters = ProductsFilter::productFilters();
                 foreach ($productFilters as $key => $filter) {
                     if (isset($filter['filter_column']) && isset($data[$filter['filter_column']]) && !empty($filter['filter_column']) && !empty($data[$filter['filter_column']])) {
-                        $categoryProducts->whereIn($filter['filter_column'],$data[$filter['filter_column']]);
+                        $categoryProducts->whereIn($filter['filter_column'], $data[$filter['filter_column']]);
                     }
                 }
                 // Checking the sort
@@ -49,15 +49,32 @@ class ProductController extends Controller
                 }
 
                 // Checking the size
-                if(isset($data['size']) && !empty($data['size'])){
-                    $productIds = ProductsAttribute::select('product_id')->whereIn('size',$data['size'])->pluck('product_id')->toArray();
-                    $categoryProducts->whereIn('products.id',$productIds);
+                if (isset($data['size']) && !empty($data['size'])) {
+                    $productIds = ProductsAttribute::select('product_id')->whereIn('size', $data['size'])->pluck('product_id')->toArray();
+                    $categoryProducts->whereIn('products.id', $productIds);
                 }
 
                 // Checking the color
-                if(isset($data['color']) && !empty($data['color'])){
-                    $productIds = Product::select('id')->whereIn('product_color',$data['color'])->pluck('id')->toArray();
+                if (isset($data['color']) && !empty($data['color'])) {
+                    $productIds = Product::select('id')->whereIn('product_color', $data['color'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id', $productIds);
+                }
+
+                // Checking the price
+                if (isset($data['price']) && !empty($data['price'])) {
+                    foreach ($data['price'] as $key => $price) {
+                        $priceArr = explode('-', $price);
+                        $productIds[] = Product::select('id')->whereBetween('product_price', [$priceArr[0], $priceArr[1]])->pluck('id')->toArray();
+                    }
+                    $productIds = call_user_func_array('array_merge',$productIds);
+                    // echo "<pre>";print_r($productIds);die;
                     $categoryProducts->whereIn('products.id',$productIds);
+                }
+
+                // Checking the brand
+                if (isset($data['brand']) && !empty($data['brand'])) {
+                    $productIds = Product::select('id')->whereIn('brand_id', $data['brand'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id', $productIds);
                 }
 
                 $categoryProducts = $categoryProducts->paginate(30);

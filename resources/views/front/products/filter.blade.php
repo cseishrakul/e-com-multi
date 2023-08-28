@@ -6,7 +6,7 @@ $productFilters = ProductsFilter::productFilters();
 
 <div class="col-lg-3 col-md-3 col-sm-12">
     <!-- Fetch-Categories-from-Root-Category  -->
-    <div class="fetch-categories">
+    {{-- <div class="fetch-categories">
         <h3 class="title-name">Browse Categories</h3>
         <!-- Level 1 -->
         <h3 class="fetch-mark-category">
@@ -46,7 +46,7 @@ $productFilters = ProductsFilter::productFilters();
             </li>
         </ul>
         <!-- //end Level 2 -->
-    </div>
+    </div> --}}
     <!-- Fetch-Categories-from-Root-Category  /- -->
     <!-- Filters -->
     <!-- Filter-Size -->
@@ -56,10 +56,11 @@ $productFilters = ProductsFilter::productFilters();
         <form class="facet-form" action="#" method="post">
             <div class="associate-wrapper">
                 @foreach ($getSizes as $key => $size)
-                <input type="checkbox" class="check-box size" name="size[]" id="size{{$key}}" value="{{$size}}">
-                <label class="label-text" for="size{{$key}}">{{$size}}
-                    {{-- <span class="total-fetch-items">(2)</span> --}}
-                </label>
+                    <input type="checkbox" class="check-box size" name="size[]" id="size{{ $key }}"
+                        value="{{ $size }}">
+                    <label class="label-text" for="size{{ $key }}">{{ $size }}
+                        {{-- <span class="total-fetch-items">(2)</span> --}}
+                    </label>
                 @endforeach
             </div>
         </form>
@@ -72,10 +73,11 @@ $productFilters = ProductsFilter::productFilters();
         <form class="facet-form" action="#" method="post">
             <div class="associate-wrapper">
                 @foreach ($getColors as $key => $color)
-                <input type="checkbox" class="check-box color" name="color[]" id="color{{$key}}" value="{{$color}}">
-                <label class="label-text" for="color{{$key}}">{{$color}}
-                    {{-- <span class="total-fetch-items">(1)</span> --}}
-                </label>
+                    <input type="checkbox" class="check-box color" name="color[]" id="color{{ $key }}"
+                        value="{{ $color }}">
+                    <label class="label-text" for="color{{ $key }}">{{ $color }}
+                        {{-- <span class="total-fetch-items">(1)</span> --}}
+                    </label>
                 @endforeach
             </div>
         </form>
@@ -86,26 +88,36 @@ $productFilters = ProductsFilter::productFilters();
         <h3 class="title-name">Brand</h3>
         <form class="facet-form" action="#" method="post">
             <div class="associate-wrapper">
-                <input type="checkbox" class="check-box" id="cbs-21">
-                <label class="label-text" for="cbs-21">Calvin Klein
-                    <span class="total-fetch-items">(0)</span>
-                </label>
-                <input type="checkbox" class="check-box" id="cbs-22">
-                <label class="label-text" for="cbs-22">Diesel
-                    <span class="total-fetch-items">(0)</span>
-                </label>
-                <input type="checkbox" class="check-box" id="cbs-23">
-                <label class="label-text" for="cbs-23">Polo
-                    <span class="total-fetch-items">(0)</span>
-                </label>
-                <input type="checkbox" class="check-box" id="cbs-24">
-                <label class="label-text" for="cbs-24">Tommy Hilfiger
-                    <span class="total-fetch-items">(0)</span>
-                </label>
+                <?php $getBrands = ProductsFilter::getBrands($url); ?>
+                @foreach ($getBrands as $key => $brand)
+                    <input type="checkbox" class="check-box brand" id="brand{{$key}}" name="brand[]" value="{{$brand['id']}}">
+                    <label class="label-text" for="brand{{$key}}">{{ $brand['name'] }}
+                        {{-- <span class="total-fetch-items">(0)</span> --}}
+                    </label>
+                @endforeach
+
             </div>
         </form>
     </div>
     <!-- Filter-Brand /- -->
+    <!-- Filter-Price -->
+    <div class="facet-filter-associates">
+        <h3 class="title-name">Price</h3>
+        <form class="facet-form" action="#" method="post">
+            <div class="associate-wrapper">
+                <?php $prices = ['0-1000', '1000-2000', '2000-5000', '5000-10000', '10000-100000']; ?>
+
+                @foreach ($prices as $key => $price)
+                    <input type="checkbox" class="check-box price" id="price{{ $key }}" name="price[]"
+                        value="{{ $price }}">
+                    <label class="label-text" for="price{{ $key }}">Tk {{ $price }}
+                        {{-- <span class="total-fetch-items">(0)</span> --}}
+                    </label>
+                @endforeach
+            </div>
+        </form>
+    </div>
+    <!-- Filter-Price /- -->
     <!-- Filter -->
     @foreach ($productFilters as $filter)
         <?php
@@ -119,7 +131,9 @@ $productFilters = ProductsFilter::productFilters();
                     <form class="facet-form" action="#" method="post">
                         <div class="associate-wrapper">
                             @foreach ($filter['filter_values'] as $value)
-                                <input type="checkbox" class="check-box {{$filter['filter_column']}}" id="{{ $value['filter_value'] }}" name="{{$filter['filter_column']}}[]" value="{{$value['filter_value']}}">
+                                <input type="checkbox" class="check-box {{ $filter['filter_column'] }}"
+                                    id="{{ $value['filter_value'] }}" name="{{ $filter['filter_column'] }}[]"
+                                    value="{{ $value['filter_value'] }}">
                                 <label class="label-text"
                                     for="{{ $value['filter_value'] }}">{{ ucwords($value['filter_value']) }}
                                     {{-- <span class="total-fetch-items">(0)</span> --}}
@@ -133,6 +147,7 @@ $productFilters = ProductsFilter::productFilters();
     @endforeach
 
     <!-- Filter /- -->
+    <?php /*
     <!-- Filter-Price -->
     <div class="facet-filter-by-price">
         <h3 class="title-name">Price</h3>
@@ -220,5 +235,7 @@ $productFilters = ProductsFilter::productFilters();
         </div>
     </div>
     <!-- Filter-Rating -->
+    */
+    ?>
     <!-- Filters /- -->
 </div>
