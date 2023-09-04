@@ -60,8 +60,13 @@
                                                     {{ $admin['email'] }}
                                                 </td>
                                                 <td>
-                                                    <img src="{{ asset('admin/photos/' . $admin['image']) }}" alt=""
-                                                        class="img-fluid">
+                                                    @if ($admin['image'] != '')
+                                                        <img src="{{ asset('admin/photos/' . $admin['image']) }}"
+                                                            alt="" class="img-fluid">
+                                                    @else
+                                                        <img src="{{ asset('admin/photos/no-image.png') }}" alt=""
+                                                            class="img-fluid">
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     @if ($admin['status'] == '1')
@@ -71,11 +76,11 @@
                                                                 status="Active"></i>
                                                         </a>
                                                     @elseif($admin['status'] == '0')
-                                                    <a href="javascript:void(0)" class="updateAdminStatus"
-                                                    id="admin-{{ $admin['id'] }}" admin_id="{{ $admin['id'] }}">
-                                                    <i class="mdi mdi-bookmark-outline" style="font-size: 25px;"
-                                                        status="Inactive"></i>
-                                                </a>
+                                                        <a href="javascript:void(0)" class="updateAdminStatus"
+                                                            id="admin-{{ $admin['id'] }}" admin_id="{{ $admin['id'] }}">
+                                                            <i class="mdi mdi-bookmark-outline" style="font-size: 25px;"
+                                                                status="Inactive"></i>
+                                                        </a>
                                                     @endif
                                                 </td>
                                                 <td>

@@ -26,6 +26,8 @@
 13. Lets see vendors all details from admin dashboard;
 14. Lets manage admin status from admin dashboard;
 15. Lets make countries database and with the help of this database lets select vendor's country + vendor's shop country;
+27 . Lets make vendor registration with email verification.
+28. Lets have admin to approve vendor id and let them allow to add products and show only those products whom are added by this vendor;
 
 
 // Again Admin Work

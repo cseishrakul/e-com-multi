@@ -142,5 +142,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('/vendor/login-register', [VendorController::class, 'loginRegister']);
 
     Route::post('vendor/register',[VendorController::class,'vendorRegister']);
+
+    // Confirm vendor account
+    Route::get('vendor/confirm/{code}',[VendorController::class,'confirmVendor']);
 });
 // End Frontend Route Group

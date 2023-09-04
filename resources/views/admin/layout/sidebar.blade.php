@@ -28,6 +28,20 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false"
+                    aria-controls="ui-basic6">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Catalouge</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic6">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/products') }}">Products</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         @else
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false"
@@ -55,8 +69,7 @@
                 <div class="collapse" id="ui-basic4">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/admins/') }}">All</a></li>
-                        <li class="nav-item"> <a class="nav-link"
-                                href="{{ url('admin/admins/admin') }}">Admins</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/admins/admin') }}">Admins</a></li>
                         <li class="nav-item"> <a class="nav-link"
                                 href="{{ url('admin/admins/subadmin') }}">Subadmins</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/admins/vendor') }}">Vendors</a>
@@ -74,7 +87,8 @@
                 <div class="collapse" id="ui-basic5">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/users') }}">Users</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/subcribers') }}">Subcribers</a>
+                        <li class="nav-item"> <a class="nav-link"
+                                href="{{ url('admin/subcribers') }}">Subcribers</a>
                         </li>
                     </ul>
                 </div>
@@ -88,8 +102,10 @@
                 </a>
                 <div class="collapse" id="ui-basic6">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/sections') }}">Sections</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/categories') }}">Categories</a>
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/sections') }}">Sections</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link"
+                                href="{{ url('admin/categories') }}">Categories</a>
                         </li>
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/brands') }}">Brands</a>
                         </li>
@@ -109,7 +125,8 @@
                 </a>
                 <div class="collapse" id="ui-basic7">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/banners') }}">Home Page Banners</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/banners') }}">Home Page
+                                Banners</a></li>
                     </ul>
                 </div>
             </li>
@@ -123,7 +140,8 @@
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a>
+                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic
+                            Elements</a>
                     </li>
                 </ul>
             </div>
