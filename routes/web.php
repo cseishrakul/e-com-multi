@@ -138,6 +138,10 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     }
 
 
+    // Product Details Page
+    Route::get('/product/{id}',[FrontProductController::class,'details']);
+
+
     // Vendor Login register
     Route::get('/vendor/login-register', [VendorController::class, 'loginRegister']);
 

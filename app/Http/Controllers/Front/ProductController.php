@@ -66,9 +66,9 @@ class ProductController extends Controller
                         $priceArr = explode('-', $price);
                         $productIds[] = Product::select('id')->whereBetween('product_price', [$priceArr[0], $priceArr[1]])->pluck('id')->toArray();
                     }
-                    $productIds = call_user_func_array('array_merge',$productIds);
+                    $productIds = call_user_func_array('array_merge', $productIds);
                     // echo "<pre>";print_r($productIds);die;
-                    $categoryProducts->whereIn('products.id',$productIds);
+                    $categoryProducts->whereIn('products.id', $productIds);
                 }
 
                 // Checking the brand
@@ -112,5 +112,14 @@ class ProductController extends Controller
                 abort(404);
             }
         }
+    }
+
+    public function details($id)
+    {
+        $productDetails = Product::with(['section', 'category', 'brand', 'attributes' => function($query){$query->where("stock",">",0)->where("status",1);}, 'images'])->find($id)->toArray();
+        $categoryDetails = Category::categoryDetails($productDetails['category']['url']);
+        $totalStock = ProductsAttribute::where('product_id', $id)->sum('stock');
+        // dd($productDetails);
+        return view('front.products.detail', compact('productDetails', 'categoryDetails','totalStock'));
     }
 }
