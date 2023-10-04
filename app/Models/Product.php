@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PDO;
 
 class Product extends Model
 {
@@ -19,8 +20,9 @@ class Product extends Model
         return $this->belongsTo('App\Models\Category', 'category_id');
     }
 
-    public function brand(){
-        return $this->belongsTo('App\Models\Brand','brand_id');
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\Brand', 'brand_id');
     }
 
     public function attributes()
@@ -51,13 +53,37 @@ class Product extends Model
         return $discounted_price;
     }
 
-    public static function isProductNew($product_id){
+    public static function getDiscountAttributePrice($product_id, $size)
+    {
+        $proAttrPrice = ProductsAttribute::where(['product_id' => $product_id, 'size' => $size])->first()->toArray();
+        $proDetails = Product::select('product_discount', 'category_id')->where('id', $product_id)->first();
+        $proDetails = json_decode(json_encode($proDetails), true);
+        $catDetails = Category::select('category_discount')->where('id', $proDetails['category_id'])->first();
+
+        $catDetails = json_decode(json_encode($catDetails), true);
+
+        if ($proDetails['product_discount'] > 0) {
+            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price'] * $proDetails['product_discount'] / 100);
+            $discount = $proAttrPrice['price'] - $final_price;
+        } else  if ($catDetails['category_discount'] > 0) {
+            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price'] * $catDetails['category_discount'] / 100);
+            $discount = $proAttrPrice['price'] - $final_price;
+        } else {
+            $final_price = $proAttrPrice['price'];
+            $discount = 0;
+        }
+
+        return array('product_price' => $proAttrPrice['price'],'final_price' => $final_price, 'discount' => $discount);
+    }
+
+    public static function isProductNew($product_id)
+    {
         // Get last 3 products
-        $productIds = Product::select('id')->where('status',1)->orderby('id','Desc')->limit(3)->pluck('id');
-        $productIds = json_decode(json_encode($productIds),true);
-        if(in_array($product_id,$productIds)){
+        $productIds = Product::select('id')->where('status', 1)->orderby('id', 'Desc')->limit(3)->pluck('id');
+        $productIds = json_decode(json_encode($productIds), true);
+        if (in_array($product_id, $productIds)) {
             $isProductNew = "Yes";
-        }else{
+        } else {
             $isProductNew = "No";
         }
 

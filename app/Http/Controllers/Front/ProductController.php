@@ -122,4 +122,14 @@ class ProductController extends Controller
         // dd($productDetails);
         return view('front.products.detail', compact('productDetails', 'categoryDetails','totalStock'));
     }
+
+    public function getProductPrice(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            // echo "<pre>";print_r($data);die;
+            $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'],$data['size']);
+
+            return $getDiscountAttributePrice;
+        }
+    }
 }
