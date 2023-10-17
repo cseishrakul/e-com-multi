@@ -7,8 +7,11 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsFilter;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Session;
+use DB;
 
 class ProductController extends Controller
 {
@@ -116,20 +119,71 @@ class ProductController extends Controller
 
     public function details($id)
     {
-        $productDetails = Product::with(['section', 'category', 'brand', 'attributes' => function($query){$query->where("stock",">",0)->where("status",1);}, 'images'])->find($id)->toArray();
+        $productDetails = Product::with(['section', 'category', 'brand', 'vendor', 'attributes' => function ($query) {
+            $query->where("stock", ">", 0)->where("status", 1);
+        }, 'images'])->find($id)->toArray();
         $categoryDetails = Category::categoryDetails($productDetails['category']['url']);
-        $totalStock = ProductsAttribute::where('product_id', $id)->sum('stock');
+
         // dd($productDetails);
-        return view('front.products.detail', compact('productDetails', 'categoryDetails','totalStock'));
+        // Get Similar Products
+        $similarProduct = Product::with('brand')->where('category_id', $productDetails['category']['id'])->where('id', '!=', $id)->limit(4)->inRandomOrder()->get()->toArray();
+
+        // Set Session for Recently Viewed Products
+        if (empty(Session::get('session_id'))) {
+            $session_id = md5(uniqid(rand(), true));
+        } else {
+            $session_id = Session::get('session_id');
+        }
+
+        Session::put('session_id', $session_id);
+
+        // Insert product in table if not already exists
+        $countRecentlyViewedProducts = DB::table('recently_viewed_products')->where(['product_id' => $id, 'session_id' => $session_id])->count();
+
+        if ($countRecentlyViewedProducts == 0) {
+            DB::table('recently_viewed_products')->insert(['product_id' => $id, 'session_id' => $session_id]);
+        }
+
+        // Get Recently Viewed Products Ids
+        $recentlyProductsIds = DB::table('recently_viewed_products')->select('product_id')->where('product_id', '!=', $id)->where('session_id', $session_id)->inRandomOrder()->get()->take(4)->pluck('product_id');
+
+        // Get Recently Viewed Products
+        $recentlyProducts = Product::with('brand')->whereIn('id',$recentlyProductsIds)->get()->toArray();
+
+        // Get Group Products (Product color)
+        $groupProducts = array();
+        if(!empty($productDetails['group_code'])){
+            $groupProducts = Product::select('id','product_image')->where('id','!=',$id)->where(['group_code' => $productDetails['group_code'],'status' => 1])->get()->toArray();
+        }
+
+        // dd($groupProducts);
+
+        $totalStock = ProductsAttribute::where('product_id', $id)->sum('stock');
+        // dd($recentlyProducts);
+        return view('front.products.detail', compact('productDetails', 'categoryDetails', 'totalStock', 'similarProduct','recentlyProducts','groupProducts'));
     }
 
-    public function getProductPrice(Request $request){
-        if($request->ajax()){
+    public function getProductPrice(Request $request)
+    {
+        if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>";print_r($data);die;
-            $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'],$data['size']);
+            $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'], $data['size']);
 
             return $getDiscountAttributePrice;
         }
+    }
+
+
+    public function vendorListing($vendorid)
+    {
+        // Get Vendor Shop Name
+        $getVendorShop = Vendor::getVendorShop($vendorid);
+        // Get Vendor Products
+        // $vendorProducts = Product::with('brand')->where('vendor_id',$vendorid)->where('status',1);
+        // $vendorProducts->paginate(30);
+        $vendorProducts = Product::with('brand')->where('vendor_id', $vendorid)->where('status', 1)->paginate(30);
+        // dd($vendorProducts);
+        return view('front.products.vendor_listing', compact('getVendorShop', 'vendorProducts'));
     }
 }

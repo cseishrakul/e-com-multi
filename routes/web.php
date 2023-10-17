@@ -137,6 +137,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::match(['get', 'post'], '/' . $url, [FrontProductController::class, 'listing']);
     }
 
+    // Vendor Products
+    Route::get('products/{vendorid}',[FrontProductController::class,'vendorListing']);
 
     // Product Details Page
     Route::get('/product/{id}',[FrontProductController::class,'details']);

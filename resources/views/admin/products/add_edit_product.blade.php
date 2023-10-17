@@ -107,7 +107,7 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_code">Product Code</label>
                                             <input type="text" class="form-control" id="product_code" name="product_code"
@@ -115,7 +115,7 @@
                                                 @if (!empty($product['product_code'])) value="{{ $product['product_code'] }}" @else value="{{ old('product_code') }}" @endif>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_color">Product Color</label>
                                             <input type="text" class="form-control" id=lor" name="product_color"
@@ -123,12 +123,20 @@
                                                 @if (!empty($product['product_color'])) value="{{ $product['product_color'] }}" @else value="{{ old('product_color') }}" @endif>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_weight">Product Weight </label>
                                             <input type="text" class="form-control" id="product_weight"
                                                 name="product_weight" placeholder="Product Weight"
                                                 @if (!empty($product['product_weight'])) value="{{ $product['product_weight'] }}" @else value="{{ old('product_weight') }}" @endif>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="group_code">Group Code </label>
+                                            <input type="text" class="form-control" id="group_code"
+                                                name="group_code" placeholder="Group Code"
+                                                @if (!empty($product['group_code'])) value="{{ $product['group_code'] }}" @else value="{{ old('group_code') }}" @endif>
                                         </div>
                                     </div>
                                 </div>

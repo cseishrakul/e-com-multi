@@ -1,7 +1,7 @@
 /* 
 
     Packages : {
-        Breeze, Intervention
+        Breeze, Intervention,EasyZoom
     }
 
 */
@@ -63,3 +63,12 @@
 8. Lets listing products by its category subcategories in frontend.With the help of url;
 9. Lets filter product by sort of highest price low price new products with and without ajax;
 10. Lets filter product by color size price filter value
+11. Lets make product details page and show each and every details of all products.
+    11.1. Lets filter product price with product size by fetching data from product attribute via ajax;
+    11.2. Lets show product filter values in product details page.
+    11.3. Lets zoom product images in details page with easyZoom Package.
+    11.4. Lets Connect Vendor with Product model with belongs to relation and lets connect vendor and vendorbussinessdetails so that we ll get vendor all details and we'll show vendor shop name in product details page if those products are added by vendor.
+    11.5. Lets show similar kind of products in details page. Similar products will fetch by which brand type products details are showing;
+    11.6. Lets show recently visited products with the help of recently_visited_products table..where by clicking  product database gonna fetch product_id and session_id and store them in DB.And then those products will be shown in recently visited products option.
+    
+12. Lets make vendor products page and fetch all products which are added by one vendor;

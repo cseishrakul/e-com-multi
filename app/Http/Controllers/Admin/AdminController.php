@@ -154,13 +154,12 @@ class AdminController extends Controller
                 // echo "<pre>"; print_r($data); die;
                 // validation
                 $rules = [
-                    'vendor_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                    'vendor_name' => 'required',
                     'vendor_mobile' => 'required|numeric',
                 ];
 
                 $customMessage = [
                     'vendor_name.required' => 'Name is required',
-                    'vendor_name.regex' => 'Valid name is required',
                     'vendor_mobile.required' => 'Mobile number is required',
                     'vendor_mobile.numeric' => 'Mobile digit must be a number'
                 ];
