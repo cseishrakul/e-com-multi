@@ -81,4 +81,8 @@
 
     13.1. First of all lets fetch product details from product attribute with product_id and fetch product stock by size.
     13.2. controller->cart function lets check is the stock > quantity or not.if its true then add the product in cart db or else not.
-    13.3 If user is not logged in then then we will recieve the item in cart with session id; 
+    13.3 If user is not logged in then then we will recieve the item in cart with session id;
+    13.4 Lets have a cart page and we'll show all products who have added to cart.for getting all products details lets have a belongs to function in cart model with product model with the help of product_id;
+    13.5 Lets update Cart items quantity with the help of ajax.Update cart db quantity field as well;
+    13.6 Lets filter cart item with product stock..if customer add item qty more then product stock then it will show a alert msg + if admin off the product size status to 0 then also customer will saw a alert message that this size is not available
+    13.7 Lets delete the cart item from cart page with the help of ajax; 

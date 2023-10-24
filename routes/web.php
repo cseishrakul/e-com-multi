@@ -157,5 +157,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     route::post('cart/add',[FrontProductController::class,'cartAdd']);
     // Cart page
     route::get('/cart',[FrontProductController::class,'cart']);
+    // Cart Update
+    Route::post('cart/update',[FrontProductController::class,'cartUpdate']);
+    // Cart Delete
+    Route::post('cart/delete',[FrontProductController::class,'cartDelete']);
 });
 // End Frontend Route Group
