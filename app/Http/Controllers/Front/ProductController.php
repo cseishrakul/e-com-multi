@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Session;
 use DB;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -148,19 +150,19 @@ class ProductController extends Controller
         $recentlyProductsIds = DB::table('recently_viewed_products')->select('product_id')->where('product_id', '!=', $id)->where('session_id', $session_id)->inRandomOrder()->get()->take(4)->pluck('product_id');
 
         // Get Recently Viewed Products
-        $recentlyProducts = Product::with('brand')->whereIn('id',$recentlyProductsIds)->get()->toArray();
+        $recentlyProducts = Product::with('brand')->whereIn('id', $recentlyProductsIds)->get()->toArray();
 
         // Get Group Products (Product color)
         $groupProducts = array();
-        if(!empty($productDetails['group_code'])){
-            $groupProducts = Product::select('id','product_image')->where('id','!=',$id)->where(['group_code' => $productDetails['group_code'],'status' => 1])->get()->toArray();
+        if (!empty($productDetails['group_code'])) {
+            $groupProducts = Product::select('id', 'product_image')->where('id', '!=', $id)->where(['group_code' => $productDetails['group_code'], 'status' => 1])->get()->toArray();
         }
 
         // dd($groupProducts);
 
         $totalStock = ProductsAttribute::where('product_id', $id)->sum('stock');
         // dd($recentlyProducts);
-        return view('front.products.detail', compact('productDetails', 'categoryDetails', 'totalStock', 'similarProduct','recentlyProducts','groupProducts'));
+        return view('front.products.detail', compact('productDetails', 'categoryDetails', 'totalStock', 'similarProduct', 'recentlyProducts', 'groupProducts'));
     }
 
     public function getProductPrice(Request $request)
@@ -185,5 +187,51 @@ class ProductController extends Controller
         $vendorProducts = Product::with('brand')->where('vendor_id', $vendorid)->where('status', 1)->paginate(30);
         // dd($vendorProducts);
         return view('front.products.vendor_listing', compact('getVendorShop', 'vendorProducts'));
+    }
+
+    public function cartAdd(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+            // echo "<pre>"; print_r($data);die; 
+            $getProductStock = ProductsAttribute::getProductStock($data['product_id'], $data['size']);
+
+            if ($getProductStock < $data['quantity']) {
+                return redirect()->back()->with('error_message', 'Required Quantity is not available');
+            }
+
+            // Generate Session id if not exists
+            $session_id = Session::get('session_id');
+            if (empty($session_id)) {
+                $session_id = Session::getId();
+                Session::put('session_id', $session_id);
+            }
+
+            // Check Product if already exists in the user cart
+            if(Auth::check()){
+                // User is logged in
+                $user_id = Auth::user()->id;
+                $countProducts = Cart::where(['product_id' => $data['product_id'], 'size' => $data['size'],'user_id' => $user_id])->count();
+            }else{
+                $user_id = 0;
+                $countProducts = Cart::where(['product_id' => $data['product_id'], 'size' => $data['size'],'session_id' => $session_id])->count();
+            } 
+
+            // Save products in cart table
+            $item = new Cart;
+            $item->session_id = $session_id;
+            $item->user_id = $user_id;
+            $item->product_id = $data['product_id'];
+            $item->size = $data['size'];
+            $item->quantity = $data['quantity'];
+            $item->save();
+            return redirect()->back()->with('success_message','Product Added To The Cart.');
+        }
+    }
+
+    public function cart(){
+        $getCartItems = Cart::getCartItems();
+        // dd($getCartItems);
+        return view('front.products.cart',compact('getCartItems'));
     }
 }

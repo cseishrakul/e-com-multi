@@ -59,6 +59,24 @@ $productFilters = ProductsFilter::productFilters();
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-details -->
                     <div class="all-information-wrapper">
+                        @if (Session::has('success_message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success: </strong> {{ Session::get('success_message') }}
+
+                                <button class="close" type="button" data-dismiss='alert' aria-label="Close">
+                                    <span aria-hidden="true"> &times; </span>
+                                </button>
+                            </div>
+                        @endif
+                        @if (Session::has('error_message'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Error: </strong> {{ Session::get('error_message') }}
+
+                                <button class="close" type="button" data-dismiss='alert' aria-label="Close">
+                                    <span aria-hidden="true"> &times; </span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
@@ -144,9 +162,12 @@ $productFilters = ProductsFilter::productFilters();
                                     class="">{{ $productDetails['vendor']['vendorbusinessdetails']['shop_name'] }}</a>
                             </div>
                         @endif
-                        <div class="section-5-product-variants u-s-p-y-14">
-                            <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
-                            {{-- <div class="color u-s-m-b-11">
+                        <form action="{{ url('cart/add') }}" class="post-form" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $productDetails['id'] }}">
+                            <div class="section-5-product-variants u-s-p-y-14">
+                                <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
+                                {{-- <div class="color u-s-m-b-11">
                                 <span>Available Color:</span>
                                 <div class="color-variant select-box-wrapper">
                                     <select class="select-box product-color">
@@ -157,36 +178,38 @@ $productFilters = ProductsFilter::productFilters();
                                 </div>
                             </div> --}}
 
-                            @if (count($groupProducts) > 0)
-                                <div class="">
+                                @if (count($groupProducts) > 0)
                                     <div class="">
-                                        <strong>Product Colors</strong>
+                                        <div class="">
+                                            <strong>Product Colors</strong>
+                                        </div>
+                                        <div style="margin-top:10px">
+                                            @foreach ($groupProducts as $product)
+                                                <a href="{{ url('product/' . $product['id']) }}" class="">
+                                                    <img style="width:70px"
+                                                        src="{{ asset('admin/photos/product_images/small/' . $product['product_image']) }}"
+                                                        alt="">
+                                                </a>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    <div  style="margin-top:10px">
-                                        @foreach ($groupProducts as $product)
-                                            <a href="{{url('product/'.$product['id'])}}" class="">
-                                                <img style="width:70px" src="{{asset('admin/photos/product_images/small/'.$product['product_image'])}}" alt="">
-                                            </a>
-                                        @endforeach
+                                @endif
+                                <div class="sizes u-s-m-b-11" style="margin-top:30px">
+                                    <span>Available Size:</span>
+                                    <div class="size-variant select-box-wrapper">
+                                        <select name="size" id="getPrice" product-id="{{ $productDetails['id'] }}"
+                                            class="select-box product-size" required>
+                                            <option value="">Select Size</option>
+                                            @foreach ($productDetails['attributes'] as $attribute)
+                                                <option value="{{ $attribute['size'] }}">{{ $attribute['size'] }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                </div>
-                            @endif
-                            <div class="sizes u-s-m-b-11" style="margin-top:30px">
-                                <span>Available Size:</span>
-                                <div class="size-variant select-box-wrapper">
-                                    <select name="size" id="getPrice" product-id="{{ $productDetails['id'] }}"
-                                        class="select-box product-size">
-                                        <option value="">Select Size</option>
-                                        @foreach ($productDetails['attributes'] as $attribute)
-                                            <option value="{{ $attribute['size'] }}">{{ $attribute['size'] }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="section-6-social-media-quantity-actions u-s-p-y-14">
-                            <form action="#" class="post-form">
-                                <div class="quick-social-media-wrapper u-s-m-b-22">
+                            <div class="section-6-social-media-quantity-actions u-s-p-y-14">
+                                {{-- <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
                                     <ul class="social-media-list">
                                         <li>
@@ -215,7 +238,7 @@ $productFilters = ProductsFilter::productFilters();
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <div class="quantity-wrapper u-s-m-b-22">
                                     <span>Quantity:</span>
                                     <div class="quantity">
@@ -228,8 +251,8 @@ $productFilters = ProductsFilter::productFilters();
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- Product-details /- -->
                 </div>
@@ -558,7 +581,8 @@ $productFilters = ProductsFilter::productFilters();
                                 @foreach ($similarProduct as $product)
                                     <div class="item">
                                         <div class="image-container">
-                                            <a class="item-img-wrapper-link" href="{{ url('product/' . $product['id']) }}">
+                                            <a class="item-img-wrapper-link"
+                                                href="{{ url('product/' . $product['id']) }}">
                                                 <?php $product_image_path = 'admin/photos/product_images/small/' . $product['product_image']; ?>
 
                                                 @if (!empty($product['product_image']) && file_exists($product_image_path))
@@ -646,7 +670,8 @@ $productFilters = ProductsFilter::productFilters();
                                 @foreach ($recentlyProducts as $product)
                                     <div class="item">
                                         <div class="image-container">
-                                            <a class="item-img-wrapper-link" href="{{ url('product/' . $product['id']) }}">
+                                            <a class="item-img-wrapper-link"
+                                                href="{{ url('product/' . $product['id']) }}">
                                                 <?php $product_image_path = 'admin/photos/product_images/small/' . $product['product_image']; ?>
 
                                                 @if (!empty($product['product_image']) && file_exists($product_image_path))

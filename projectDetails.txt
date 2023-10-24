@@ -70,5 +70,15 @@
     11.4. Lets Connect Vendor with Product model with belongs to relation and lets connect vendor and vendorbussinessdetails so that we ll get vendor all details and we'll show vendor shop name in product details page if those products are added by vendor.
     11.5. Lets show similar kind of products in details page. Similar products will fetch by which brand type products details are showing;
     11.6. Lets show recently visited products with the help of recently_visited_products table..where by clicking  product database gonna fetch product_id and session_id and store them in DB.And then those products will be shown in recently visited products option.
+    Databse Field Name:
+    product_id, session_id
     
 12. Lets make vendor products page and fetch all products which are added by one vendor;
+
+13. Lets Make Cart option.User can add product to the cart with the help of cart model and db.
+    Database Field Name:
+        session_id,user_id,product_id,size,quantity
+
+    13.1. First of all lets fetch product details from product attribute with product_id and fetch product stock by size.
+    13.2. controller->cart function lets check is the stock > quantity or not.if its true then add the product in cart db or else not.
+    13.3 If user is not logged in then then we will recieve the item in cart with session id; 

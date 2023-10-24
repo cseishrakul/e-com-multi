@@ -119,7 +119,7 @@
                                     <div class="form-group">
                                         <label for="vendor_name">Shop Name</label>
                                         <input type="text" class="form-control"
-                                            @if(isset($vendorDetails['shop_name'])) value="{{$vendorDetails['shop_name']}}" @endif readonly>
+                                            @if(isset($vendorDetails['vendor_business']['shop_name'])) value="{{$vendorDetails['vendor_business']['shop_name']}}" @endif readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

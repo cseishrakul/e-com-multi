@@ -151,5 +151,11 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
     // Confirm vendor account
     Route::get('vendor/confirm/{code}',[VendorController::class,'confirmVendor']);
+
+
+    // Add to cart
+    route::post('cart/add',[FrontProductController::class,'cartAdd']);
+    // Cart page
+    route::get('/cart',[FrontProductController::class,'cart']);
 });
 // End Frontend Route Group
