@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController as FrontProductController;
+use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\Front\VendorController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -161,5 +162,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('cart/update',[FrontProductController::class,'cartUpdate']);
     // Cart Delete
     Route::post('cart/delete',[FrontProductController::class,'cartDelete']);
+
+
+    // User Controller
+    Route::get('user/login-register',[UserController::class,'loginRegister']);
 });
 // End Frontend Route Group

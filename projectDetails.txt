@@ -86,3 +86,8 @@
     13.5 Lets update Cart items quantity with the help of ajax.Update cart db quantity field as well;
     13.6 Lets filter cart item with product stock..if customer add item qty more then product stock then it will show a alert msg + if admin off the product size status to 0 then also customer will saw a alert message that this size is not available
     13.7 Lets delete the cart item from cart page with the help of ajax; 
+
+    // User Login registration
+    13.8 Lets have a users table in db and put those data field:
+        name,address,city,state,country,mobile,email,pincode,password,status
+    13.9 Lets make login register page for user in frontend.
