@@ -139,32 +139,44 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     }
 
     // Vendor Products
-    Route::get('products/{vendorid}',[FrontProductController::class,'vendorListing']);
+    Route::get('products/{vendorid}', [FrontProductController::class, 'vendorListing']);
 
     // Product Details Page
-    Route::get('/product/{id}',[FrontProductController::class,'details']);
-    Route::post('get-product-price',[FrontProductController::class,'getProductPrice']);
+    Route::get('/product/{id}', [FrontProductController::class, 'details']);
+    Route::post('get-product-price', [FrontProductController::class, 'getProductPrice']);
 
     // Vendor Login register
     Route::get('/vendor/login-register', [VendorController::class, 'loginRegister']);
 
-    Route::post('vendor/register',[VendorController::class,'vendorRegister']);
+    Route::post('vendor/register', [VendorController::class, 'vendorRegister']);
 
     // Confirm vendor account
-    Route::get('vendor/confirm/{code}',[VendorController::class,'confirmVendor']);
+    Route::get('vendor/confirm/{code}', [VendorController::class, 'confirmVendor']);
 
 
     // Add to cart
-    route::post('cart/add',[FrontProductController::class,'cartAdd']);
+    route::post('cart/add', [FrontProductController::class, 'cartAdd']);
     // Cart page
-    route::get('/cart',[FrontProductController::class,'cart']);
+    route::get('/cart', [FrontProductController::class, 'cart']);
     // Cart Update
-    Route::post('cart/update',[FrontProductController::class,'cartUpdate']);
+    Route::post('cart/update', [FrontProductController::class, 'cartUpdate']);
     // Cart Delete
-    Route::post('cart/delete',[FrontProductController::class,'cartDelete']);
+    Route::post('cart/delete', [FrontProductController::class, 'cartDelete']);
 
 
     // User Controller
-    Route::get('user/login-register',[UserController::class,'loginRegister']);
+    Route::get('user/login-register', [UserController::class, 'loginRegister']);
+
+    // User Register
+    Route::post('user/register', [UserController::class, 'userRegister']);
+
+    // User email confirmation
+    Route::get('user/confirm/{code}',[UserController::class,'confirmAccount']);
+
+    // User Login
+    Route::post('user/login',[UserController::class,'userLogin']);
+
+    // User logout
+    Route::get('user/logout',[UserController::class,'userLogout']);
 });
 // End Frontend Route Group

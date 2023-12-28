@@ -88,6 +88,18 @@
     13.7 Lets delete the cart item from cart page with the help of ajax; 
 
     // User Login registration
-    13.8 Lets have a users table in db and put those data field:
+    14.1 Lets have a users table in db and put those data field:
         name,address,city,state,country,mobile,email,pincode,password,status
-    13.9 Lets make login register page for user in frontend.
+    14.2 Lets make login register page for user in frontend.
+    14.3 Lets register user in database with the help of ajax.So that it will not refresh while user submit his/her details from register form.
+    14.4 Lets validate our register form with the help of ajax.
+    14.5 Lets give a welcome email to the users who have registered in the website.
+
+    14.6 You can send welcome message to our customer via laravel sms packages in there personal mobile number.
+
+    14.7 Now lets make login option and lets have login option for users.For login as well we'll use ajax for first load.
+    14.8 If user add cart without register or login to the side & after adding product to the cart if they register or login to the site then we will check session id and user id and we'll put the new register or logged in users id to the cart user_id field of the database;
+
+    14.9 Before giving new registerd user a welcome message lets give them a confirmation email.By clicking this email there account will be activate. Until then the registration will not be 100% completed.
+
+    14.10 After confirming the email user will be redirect to the login page and a welcome email will also come to his/her email as well.

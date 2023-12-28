@@ -26,7 +26,12 @@ $sections = Section::sections();
             <nav>
                 <ul class="secondary-nav g-nav">
                     <li>
-                        <a>My Account
+                        <a>
+                            @if (Auth::check())
+                                My Account
+                            @else
+                                Login / Register
+                            @endif
                             <i class="fas fa-chevron-down u-s-m-l-9"></i>
                         </a>
                         <ul class="g-dropdown" style="width:200px">
@@ -40,21 +45,34 @@ $sections = Section::sections();
                                     <i class="far fa-heart u-s-m-r-9"></i>
                                     My Wishlist</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="checkout.html">
                                     <i class="far fa-check-circle u-s-m-r-9"></i>
                                     Checkout</a>
-                            </li>
-                            <li>
-                                <a href="{{url('user/login-register')}}">
-                                    <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                    Customer Login</a>
-                            </li>
-                            <li>
-                                <a href="{{url('vendor/login-register')}}">
-                                    <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                    Vendor Login</a>
-                            </li>
+                            </li> --}}
+                            @if (Auth::check())
+                                <li>
+                                    <a href="{{ url('user/account') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        My Account</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('user/logout') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Logout</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ url('user/login-register') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Customer Login</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('vendor/login-register') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Vendor Login</a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li>
@@ -93,7 +111,7 @@ $sections = Section::sections();
             <div class="row clearfix align-items-center">
                 <div class="col-lg-3 col-md-9 col-sm-6">
                     <div class="brand-logo text-lg-center">
-                        <a href="{{url('/')}}">
+                        <a href="{{ url('/') }}">
                             <img src="{{ asset('front') }}/images/main-logo/stack-developers-logo.png"
                                 alt="Stack Developers" class="app-brand-logo">
                         </a>
@@ -237,24 +255,25 @@ $sections = Section::sections();
                                                 <div class="v-drop-right" style="width: 700px;">
                                                     <div class="row">
                                                         @foreach ($section['categories'] as $category)
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="{{url($category['url'])}}">{{$category['category_name']}}</a>
-                                                                    <ul>
-                                                                        @foreach ($category['subcategories'] as $subcategory)
-                                                                        <li>
-                                                                            <a
-                                                                                href="{{url($subcategory['url'])}}">{{$subcategory['category_name']}}</a>
-                                                                        </li> 
-                                                                        @endforeach
-                                                                        
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                            <div class="col-lg-4">
+                                                                <ul class="v-level-2">
+                                                                    <li>
+                                                                        <a
+                                                                            href="{{ url($category['url']) }}">{{ $category['category_name'] }}</a>
+                                                                        <ul>
+                                                                            @foreach ($category['subcategories'] as $subcategory)
+                                                                                <li>
+                                                                                    <a
+                                                                                        href="{{ url($subcategory['url']) }}">{{ $subcategory['category_name'] }}</a>
+                                                                                </li>
+                                                                            @endforeach
+
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         @endforeach
-                                                        
+
                                                     </div>
                                                 </div>
                                             </li>
