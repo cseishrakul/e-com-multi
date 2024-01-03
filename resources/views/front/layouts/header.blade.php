@@ -1,7 +1,9 @@
 <?php
 use App\Models\Section;
+use App\Models\Product;
 $sections = Section::sections();
 // echo "<pre>";print_r($sections);die;
+$totalCartItems = totalCartItems();
 ?>
 
 <header>
@@ -28,7 +30,7 @@ $sections = Section::sections();
                     <li>
                         <a>
                             @if (Auth::check())
-                                My Account
+                                {{ Auth::user()->name }}
                             @else
                                 Login / Register
                             @endif
@@ -153,8 +155,8 @@ $sections = Section::sections();
                             <li>
                                 <a id="mini-cart-trigger">
                                     <i class="ion ion-md-basket"></i>
-                                    <span class="item-counter">4</span>
-                                    <span class="item-price">$220.00</span>
+                                    <span class="item-counter totalCartItems"> {{ $totalCartItems }} </span>
+                                    <span class="item-price"> 220.00 TK </span>
                                 </a>
                             </li>
                         </ul>
@@ -178,55 +180,8 @@ $sections = Section::sections();
     </div>
     <!-- Responsive-Buttons /- -->
     <!-- Mini Cart -->
-    <div class="mini-cart-wrapper">
-        <div class="mini-cart">
-            <div class="mini-cart-header">
-                YOUR CART
-                <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
-            </div>
-            <ul class="mini-cart-list">
-                <li class="clearfix">
-                    <a href="single-product.html">
-                        <img src="{{ asset('front') }}/images/product/product@1x.jpg" alt="Product">
-                        <span class="mini-item-name">Product name</span>
-                        <span class="mini-item-price">$100.00</span>
-                        <span class="mini-item-quantity"> x 1 </span>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="single-product.html">
-                        <img src="{{ asset('front') }}/images/product/product@1x.jpg" alt="Product">
-                        <span class="mini-item-name">Product name</span>
-                        <span class="mini-item-price">$100.00</span>
-                        <span class="mini-item-quantity"> x 1 </span>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="single-product.html">
-                        <img src="{{ asset('front') }}/images/product/product@1x.jpg" alt="Product">
-                        <span class="mini-item-name">Product name</span>
-                        <span class="mini-item-price">$100.00</span>
-                        <span class="mini-item-quantity"> x 1 </span>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="single-product.html">
-                        <img src="{{ asset('front') }}/images/product/product@1x.jpg" alt="Product">
-                        <span class="mini-item-name">Product name</span>
-                        <span class="mini-item-price">$100.00</span>
-                        <span class="mini-item-quantity"> x 1 </span>
-                    </a>
-                </li>
-            </ul>
-            <div class="mini-shop-total clearfix">
-                <span class="mini-total-heading float-left">Total:</span>
-                <span class="mini-total-price float-right">$400.00</span>
-            </div>
-            <div class="mini-action-anchors">
-                <a href="cart.html" class="cart-anchor">View Cart</a>
-                <a href="checkout.html" class="checkout-anchor">Checkout</a>
-            </div>
-        </div>
+    <div id="appendHeaderCartItem">
+        @include('front.layouts.header_cart_item');
     </div>
     <!-- Mini Cart /- -->
     <!-- Bottom-Header -->

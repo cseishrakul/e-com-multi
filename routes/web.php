@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
@@ -124,6 +125,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
         // CMS Pages
         Route::get('cms-pages', [CmsController::class, 'cmsPages']);
+
+        // Coupon
+        Route::get('coupons',[CouponController::class,'coupons']);
+        Route::post('update-coupon-status', [CouponController::class, 'updateCouponStatus']);
+        Route::get('delete-coupon/{id}', [CouponController::class, 'deleteCoupon']);
     });
 });
 // End Admin Route Group
@@ -165,18 +171,30 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
 
     // User Controller
-    Route::get('user/login-register', [UserController::class, 'loginRegister']);
-
+    Route::get('user/login-register', [UserController::class, 'loginRegister'])->name('login');
+    
     // User Register
     Route::post('user/register', [UserController::class, 'userRegister']);
 
     // User email confirmation
-    Route::get('user/confirm/{code}',[UserController::class,'confirmAccount']);
+    Route::get('user/confirm/{code}', [UserController::class, 'confirmAccount']);
 
     // User Login
-    Route::post('user/login',[UserController::class,'userLogin']);
+    Route::post('user/login', [UserController::class, 'userLogin']);
+
+
+    Route::group(['middleware' => ['auth']], function () {
+        // User Account
+        Route::match(['get', 'post'], 'user/account', [UserController::class, 'userAccount']);
+
+        // User Password Update
+        Route::post("user/update-password", [UserController::class, 'userUpdatePassword']);
+    });
 
     // User logout
-    Route::get('user/logout',[UserController::class,'userLogout']);
+    Route::get('user/logout', [UserController::class, 'userLogout']);
+
+    // User forgot password
+    Route::match(['get', 'post'], 'user/forgot-password', [UserController::class, 'userForgotPassword']);
 });
 // End Frontend Route Group

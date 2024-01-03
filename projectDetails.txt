@@ -103,3 +103,26 @@
     14.9 Before giving new registerd user a welcome message lets give them a confirmation email.By clicking this email there account will be activate. Until then the registration will not be 100% completed.
 
     14.10 After confirming the email user will be redirect to the login page and a welcome email will also come to his/her email as well.
+
+    14.11 While user submit register button lets have a loader until user get the confirmation email.
+
+    14.12 Lets add forgot password option for users and let them have there password using the email address they have been used during register.
+
+    14.13 Lets have my account page for user and from there lets update user details like name address city etc.
+
+    14.14 Lets have Auth protection for user account so that without login no one can go to user/account page.
+
+
+    15. Lets have a helper.For that create folder in app..add helper.php under it..go to composer.json add this file in autoload and from terminal play composer dump-autoload. 
+
+    15.1 With the help of helper lets update cart items.lets have a cart item function in helper and fetch it in header for cart item update and for ajax lets call this function in update and delete cart function in controller and js file.
+
+    15.2 Lets Show cart items in mini cart bar of header with the help of helper and ajax.
+
+
+    16. Lets Make Coupon option in website:
+
+    16.1 Lets create a table in database:
+        ('vendor_id');('coupon_option');('coupon_code');('categories');('users');('coupon_type');('amount_type');('amount');('expiry_date');('status');
+    
+    16.2 Lets add some dummy data in it with the help of seeder && lets make coupon model and admin coupon controller
