@@ -21,7 +21,7 @@
                 <tr>
                     <td>
                         <div class="cart-anchor-image">
-                            <a href="{{url('product/'.$item['product_id'])}}">
+                            <a href="{{ url('product/' . $item['product_id']) }}">
                                 <img src="{{ asset('admin/photos/product_images/small/' . $item['product']['product_image']) }}"
                                     alt="Product">
                                 <h6>
@@ -58,8 +58,10 @@
                         <div class="cart-quantity">
                             <div class="quantity">
                                 <input type="text" class="quantity-text-field" value="{{ $item['quantity'] }}">
-                                <a class="plus-a updateCartItem" data-cartid ="{{$item['id']}}" data-qty="{{$item['quantity']}}" data-max="1000">&#43;</a>
-                                <a class="minus-a updateCartItem" data-cartid ="{{$item['id']}}" data-qty="{{$item['quantity']}}" data-min="1">&#45;</a>
+                                <a class="plus-a updateCartItem" data-cartid ="{{ $item['id'] }}"
+                                    data-qty="{{ $item['quantity'] }}" data-max="1000">&#43;</a>
+                                <a class="minus-a updateCartItem" data-cartid ="{{ $item['id'] }}"
+                                    data-qty="{{ $item['quantity'] }}" data-min="1">&#45;</a>
                             </div>
                         </div>
                     </td>
@@ -71,12 +73,13 @@
                     <td>
                         <div class="action-wrapper">
                             {{-- <button class="button button-outline-secondary fas fa-sync"></button> --}}
-                            <button class="button button-outline-secondary fas fa-trash deleteCartItem" data-cartid="{{$item['id']}}"></button>
+                            <button class="button button-outline-secondary fas fa-trash deleteCartItem"
+                                data-cartid="{{ $item['id'] }}"></button>
                         </div>
                     </td>
                 </tr>
                 @php
-                    $total_price = $total_price + ($getDiscountAttributePrice['final_price'] * $item['quantity'])
+                    $total_price = $total_price + $getDiscountAttributePrice['final_price'] * $item['quantity'];
                 @endphp
             @endforeach
 
@@ -89,9 +92,12 @@
     <div class="coupon-area">
         <h6>Enter your coupon code if you have one.</h6>
         <div class="coupon-field">
-            <label class="sr-only" for="coupon-code">Apply Coupon</label>
-            <input id="coupon-code" type="text" class="text-field" placeholder="Coupon Code">
-            <button type="submit" class="button">Apply Coupon</button>
+            <form id="ApplyCoupon" method="POST" action="javascript:void(0)" @if(Auth::check()) user="1" @endif>
+                @csrf
+                <label class="sr-only" for="coupon-code">Apply Coupon</label>
+                <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
+                <button type="submit" class="button">Apply Coupon</button>
+            </form>
         </div>
     </div>
     <div class="button-area">
@@ -115,7 +121,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">Sub Total</h3>
                     </td>
                     <td>
-                        <span class="calc-text">{{$total_price}} Tk.</span>
+                        <span class="calc-text">{{ $total_price }} Tk.</span>
                     </td>
                 </tr>
                 <tr>
@@ -131,7 +137,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">Grand Total</h3>
                     </td>
                     <td>
-                        <span class="calc-text">{{$total_price}} Tk.</span>
+                        <span class="calc-text">{{ $total_price }} Tk.</span>
                     </td>
                 </tr>
             </tbody>

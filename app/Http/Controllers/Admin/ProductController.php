@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsFilter;
@@ -396,4 +398,5 @@ class ProductController extends Controller
         $message = "Product image has been deleted successfully!";
         return redirect()->back()->with('success_message', $message);
     }
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsFilter;
@@ -296,6 +297,27 @@ class ProductController extends Controller
                 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
                 'headerview' => (string)View::make('front.layouts.header_cart_item')->with(compact('getCartItems'))
             ]);
+        }
+    }
+
+    public function applyCoupon(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            // echo "<pre>";print_r($data);die;
+            $getCartItems = Cart::getCartItems();
+            $totalCartItems = totalCartItems();
+            $couponCount = Coupon::where('coupon_code',$data['code'])->count();
+            if($couponCount == 0){
+                return response()->json([
+                    'status' => 'false',
+                    'totalCartItems' => $totalCartItems,
+                    'message' => 'The Coupon Is Not Valid',
+                    'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                    'headerview' => (string)View::make('front.layouts.header_cart_item')->with(compact('getCartItems'))
+                ]);
+            }else{
+                echo "Coupon is valid";
+            }
         }
     }
 }

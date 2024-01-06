@@ -130,6 +130,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('coupons',[CouponController::class,'coupons']);
         Route::post('update-coupon-status', [CouponController::class, 'updateCouponStatus']);
         Route::get('delete-coupon/{id}', [CouponController::class, 'deleteCoupon']);
+        Route::match(['get','post'],'add-edit-coupon/{id?}',[CouponController::class,'addEditCoupon']);
     });
 });
 // End Admin Route Group
@@ -189,6 +190,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
         // User Password Update
         Route::post("user/update-password", [UserController::class, 'userUpdatePassword']);
+
+        // Apply Coupon
+        Route::post('/apply-coupon',[FrontProductController::class,'applyCoupon']);
     });
 
     // User logout

@@ -443,15 +443,24 @@ $(document).ready(function () {
         var category_id = $(this).val();
         // alert(category_id);
         $.ajax({
-            headers:{
-                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            type:'post',
-            url:'category-filters',
-            data:{category_id:category_id},
-            success:function(resp){
+            type: "post",
+            url: "category-filters",
+            data: { category_id: category_id },
+            success: function (resp) {
                 $(".loadFilters").html(resp.view);
-            }
+            },
         });
+    });
+
+    // Show/Hide Coupon field for Manual/Automatic
+    $("#manualCoupon").click(function () {
+        $("#couponField").show();
+    });
+
+    $("#automaticCoupon").click(function () {
+        $("#couponField").hide();
     });
 });

@@ -123,6 +123,13 @@
     16. Lets Make Coupon option in website:
 
     16.1 Lets create a table in database:
-        ('vendor_id');('coupon_option');('coupon_code');('categories');('users');('coupon_type');('amount_type');('amount');('expiry_date');('status');
+        ('vendor_id');('coupon_option');('coupon_code');('categories');('brands');('users');('coupon_type');('amount_type');('amount');('expiry_date');('status');
     
     16.2 Lets add some dummy data in it with the help of seeder && lets make coupon model and admin coupon controller
+    16.3 Lets fetch coupons table data in admin panel and work with status active inactive and delete coupon.
+
+    16.3 Lets create add edit form for coupon.
+    16.4 For automatic generate coupon code lets use str_random() function and for use it lets install: composer require laravel/helpers
+    16.5 Lets add data in database with add coupon form and fetch them in admin panel.
+    16.6 Lets Update coupon's from the admin panel.
+    16.7 
