@@ -325,6 +325,16 @@ $(document).ready(function () {
                 $(".totalCartItems").html(resp.totalCartItems);
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerview);
+                if(resp.couponAmount > 0){
+                    $(".couponAmount").text(resp.couponAmount + "Tk");
+                }else{
+                    $(".couponAmount").text("0 Tk");
+                }
+                if(resp.grand_total > 0){
+                    $(".grand_total").text(resp.grand_total + "Tk");
+                }else{
+                    $(".grand_total").text("0 Tk");
+                }
             },
             error: function () {
                 alert("Error");

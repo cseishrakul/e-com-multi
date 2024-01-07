@@ -132,4 +132,6 @@
     16.4 For automatic generate coupon code lets use str_random() function and for use it lets install: composer require laravel/helpers
     16.5 Lets add data in database with add coupon form and fetch them in admin panel.
     16.6 Lets Update coupon's from the admin panel.
-    16.7 
+    16.7 Lets check coupon status active or not, expiry date is gone or not, is coupon is for selected category or not, coupon is for user or not, if not then show error message, if vendor add any coupon then it'll be only usable in that products whom added by this vendor.
+    16.8 Lets use coupon in cart item and make discount as coupon amount type fixed or percentage.
+     

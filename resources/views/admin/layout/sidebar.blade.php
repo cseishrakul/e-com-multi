@@ -39,6 +39,8 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/products') }}">Products</a>
                         </li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/coupons') }}">Coupons</a>
+                        </li>
                     </ul>
                 </div>
             </li>

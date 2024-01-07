@@ -87,25 +87,7 @@
     </table>
 </div>
 <!-- Products-List-Wrapper /- -->
-<!-- Coupon -->
-<div class="coupon-continue-checkout u-s-m-b-60">
-    <div class="coupon-area">
-        <h6>Enter your coupon code if you have one.</h6>
-        <div class="coupon-field">
-            <form id="ApplyCoupon" method="POST" action="javascript:void(0)" @if(Auth::check()) user="1" @endif>
-                @csrf
-                <label class="sr-only" for="coupon-code">Apply Coupon</label>
-                <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
-                <button type="submit" class="button">Apply Coupon</button>
-            </form>
-        </div>
-    </div>
-    <div class="button-area">
-        <a href="shop-v1-root-category.html" class="continue">Continue Shopping</a>
-        <a href="checkout.html" class="checkout">Proceed to Checkout</a>
-    </div>
-</div>
-<!-- Coupon /- -->
+
 <!-- Billing -->
 <div class="calculation u-s-m-b-60">
     <div class="table-wrapper-2">
@@ -129,7 +111,13 @@
                         <h3 class="calc-h3 u-s-m-b-0">Coupon Discount</h3>
                     </td>
                     <td>
-                        <span class="calc-text">0 Tk.</span>
+                        <span class="calc-text couponAmount">
+                            @if (Session::has('couponAmount'))
+                                {{Session::get('couponAmount')}} Tk
+                            @else
+                                0 Tk.
+                            @endif
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -137,7 +125,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">Grand Total</h3>
                     </td>
                     <td>
-                        <span class="calc-text">{{ $total_price }} Tk.</span>
+                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }} Tk.</span>
                     </td>
                 </tr>
             </tbody>

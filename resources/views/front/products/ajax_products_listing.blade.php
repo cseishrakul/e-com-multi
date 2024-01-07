@@ -28,17 +28,17 @@
                     <div class="what-product-is">
                         <ul class="bread-crumb">
                             <li class="has-separator">
-                                <a href="shop-v1-root-category.html">{{ $product['product_code'] }}</a>
+                                <a href="">{{ $product['product_code'] }}</a>
                             </li>
                             <li class="has-separator">
-                                <a href="listing.html">{{ $product['product_color'] }}</a>
+                                <a href="">{{ $product['product_color'] }}</a>
                             </li>
                             <li class="">
-                                <a href="listing.html">{{ $product['brand']['name'] }}</a>
+                                <a href="">{{ $product['brand']['name'] }}</a>
                             </li>
                         </ul>
                         <h6 class="item-title">
-                            <a href="single-product.html">{{ $product['product_name'] }}</a>
+                            <a href="{{url('product/'.$product['id'])}}">{{ $product['product_name'] }}</a>
                         </h6>
                         <div class="item-description">
                             <p>{{ $product['description'] }}

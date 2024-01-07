@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController as FrontProductController;
 use App\Http\Controllers\Front\UserController;
@@ -131,6 +132,10 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-coupon-status', [CouponController::class, 'updateCouponStatus']);
         Route::get('delete-coupon/{id}', [CouponController::class, 'deleteCoupon']);
         Route::match(['get','post'],'add-edit-coupon/{id?}',[CouponController::class,'addEditCoupon']);
+
+        // User
+        Route::get('users',[AdminUserController::class,'users']);
+        Route::post('update-user-status', [AdminUserController::class, 'updateUserStatus']);
     });
 });
 // End Admin Route Group
