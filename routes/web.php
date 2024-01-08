@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Front\AddressController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController as FrontProductController;
 use App\Http\Controllers\Front\UserController;
@@ -198,6 +199,13 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
         // Apply Coupon
         Route::post('/apply-coupon',[FrontProductController::class,'applyCoupon']);
+
+
+        // Checkout
+        Route::match(['get','post'],'/checkout',[FrontProductController::class,'checkout']);
+
+        // Delivery Address
+        Route::post('/get-delivery-address',[AddressController::class,'getDeliveryAddress']);
     });
 
     // User logout

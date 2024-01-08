@@ -135,3 +135,13 @@
     16.7 Lets check coupon status active or not, expiry date is gone or not, is coupon is for selected category or not, coupon is for user or not, if not then show error message, if vendor add any coupon then it'll be only usable in that products whom added by this vendor.
     16.8 Lets use coupon in cart item and make discount as coupon amount type fixed or percentage.
      
+    17. Lets Fetch all users info from database to admin panel
+
+    // Checout
+
+    18.1. Lets make delivery_addresses db_table model and fill the table with those field name:
+        $table->integer('user_id');$table->string('name');$table->string('address');$table->string('city');$table->string('state');$table->string('country');$table->string('pincode');$table->string('mobile');$table->tinyInteger('status');
+        Lets have some dummy data with seeder.
+
+    18.2. If user has delivery_addresses then lets show them in checkout page.If not then lets show add address option in checkout page.
+    18.3 With the help of ajax lets fetch all info of user from delivery_Addresses table for edit data.

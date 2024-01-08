@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Coupon;
+use App\Models\DeliveryAddress;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsFilter;
@@ -444,4 +446,11 @@ class ProductController extends Controller
             }
         }
     }
+
+    public function checkout(Request $request){
+        $deliveryAddresses = DeliveryAddress::deliveryAddresses();
+        $countries = Country::where('status',1)->get()->toArray();
+        return view('front.products.checkout',compact('deliveryAddresses','countries'));
+    }
+
 }

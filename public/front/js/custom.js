@@ -318,23 +318,53 @@ $(document).ready(function () {
             data: { code: code },
             url: "/apply-coupon",
             success: function (resp) {
-                if(resp.message !=""){
+                if (resp.message != "") {
                     alert(resp.message);
                 }
 
                 $(".totalCartItems").html(resp.totalCartItems);
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerview);
-                if(resp.couponAmount > 0){
+                if (resp.couponAmount > 0) {
                     $(".couponAmount").text(resp.couponAmount + "Tk");
-                }else{
+                } else {
                     $(".couponAmount").text("0 Tk");
                 }
-                if(resp.grand_total > 0){
+                if (resp.grand_total > 0) {
                     $(".grand_total").text(resp.grand_total + "Tk");
-                }else{
+                } else {
                     $(".grand_total").text("0 Tk");
                 }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    // Edit Delivery Address
+    $(document).on("click", ".editAddress", function () {
+        var addressid = $(this).data("addressid");
+        // alert(addressId);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: { addressid: addressid },
+            url: "/get-delivery-address",
+            type: "post",
+            success: function (resp) {
+                $("#showdifferent").removeClass("collapse");
+                $(".newAddress").hide();
+                $(".deliveryText").text("Edit Delivery Address");
+                $("[name = delivery_id]").val(resp.address["id"]);
+                $("[name = delivery_name]").val(resp.address["name"]);
+                $("[name = delivery_address]").val(resp.address["address"]);
+                $("[name = delivery_city]").val(resp.address["city"]);
+                $("[name = delivery_state]").val(resp.address["state"]);
+                $("[name = delivery_country]").val(resp.address["country"]);
+                $("[name = delivery_pincode]").val(resp.address["pincode"]);
+                $("[name = delivery_mobile]").val(resp.address["mobile"]);
             },
             error: function () {
                 alert("Error");
