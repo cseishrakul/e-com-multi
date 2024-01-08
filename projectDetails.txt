@@ -144,4 +144,4 @@
         Lets have some dummy data with seeder.
 
     18.2. If user has delivery_addresses then lets show them in checkout page.If not then lets show add address option in checkout page.
-    18.3 With the help of ajax lets fetch all info of user from delivery_Addresses table for edit data.
+    18.3 With the help of ajax lets fetch all info of user from delivery_Addresses table for edit address data.
