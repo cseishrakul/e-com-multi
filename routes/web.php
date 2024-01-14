@@ -206,6 +206,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
         // Delivery Address
         Route::post('/get-delivery-address',[AddressController::class,'getDeliveryAddress']);
+
+        Route::post('/save-delivery-address',[AddressController::class,'saveDeliveryAddress']);
+        Route::post('/remove-delivery-address',[AddressController::class,'removeDeliveryAddress']);
     });
 
     // User logout

@@ -345,7 +345,7 @@ $(document).ready(function () {
     // Edit Delivery Address
     $(document).on("click", ".editAddress", function () {
         var addressid = $(this).data("addressid");
-        // alert(addressId);
+        // alert(addressid);
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -370,5 +370,57 @@ $(document).ready(function () {
                 alert("Error");
             },
         });
+    });
+
+    // Save Delivery Address
+    $(document).on("submit", "#addressAddEditForm", function () {
+        var formdata = $("#addressAddEditForm").serialize();
+        $.ajax({
+            url: "/save-delivery-address",
+            type: "post",
+            data: formdata,
+            success: function (resp) {
+                // alert(data);
+                if ((resp.type = "error")) {
+                    $(".loader").hide();
+                    $.each(resp.errors, function (i, error) {
+                        $("#delivery-" + i).attr("style", "color:red");
+                        $("#delivery-" + i).html(error);
+                        setTimeout(function () {
+                            $("#delivery-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                }
+                $("#deliveryAddresses").html(resp.view);
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    // Remove Delivery Address
+    $(document).on("click", ".removeAddress", function () {
+        if (confirm("Are you sure to remove this?")) {
+            var addressid = $(this).data("addressid");
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: "/remove-delivery-address",
+                type: "post",
+                data: { addressid: addressid },
+                success: function (resp) {
+                    $("#deliveryAddresses").html(resp.view);
+                },
+                error: function () {
+                    alert("Error");
+                },
+            });
+        }
     });
 });

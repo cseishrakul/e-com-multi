@@ -145,3 +145,7 @@
 
     18.2. If user has delivery_addresses then lets show them in checkout page.If not then lets show add address option in checkout page.
     18.3 With the help of ajax lets fetch all info of user from delivery_Addresses table for edit address data.
+    18.4 Lets Update Delivery Address with the help of ajax.
+    18.5 Lets add and remove delivery address with the help of ajax.
+    18.9 Lets do validation of delivery_Addresses add edit form.
+    18.10 Lets fetch all data from cart in checkout page for see product name and price details + lets have payment option and delivery_addresses select option in it.

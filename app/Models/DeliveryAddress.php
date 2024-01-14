@@ -9,9 +9,12 @@ use Auth;
 class DeliveryAddress extends Model
 {
     use HasFactory;
+    protected $fillable = ['user_id', 'name', 'address', 'city', 'state', 'country', 'pincode','mobile', 'status'];
 
-    public static function deliveryAddresses(){
-        $deliveyAddresses = DeliveryAddress::where('user_id',Auth::user()->id)->get()->toArray();
+
+    public static function deliveryAddresses()
+    {
+        $deliveyAddresses = DeliveryAddress::where('user_id', Auth::user()->id)->get()->toArray();
 
         return $deliveyAddresses;
     }
