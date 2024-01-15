@@ -43,7 +43,7 @@ require __DIR__ . '/auth.php';
 // Admin Route Group
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
     // Admin Login
-    Route::match(['get', 'post'], '/login', [AdminController::class, 'login']);
+    Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('admin.login');
 
     Route::group(['middleware' => ['admin']], function () {
         // Admin dashborar route
@@ -209,6 +209,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
         Route::post('/save-delivery-address',[AddressController::class,'saveDeliveryAddress']);
         Route::post('/remove-delivery-address',[AddressController::class,'removeDeliveryAddress']);
+
+        // Thanks
+        Route::get('thanks',[FrontProductController::class,'thanks']);
     });
 
     // User logout

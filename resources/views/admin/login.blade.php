@@ -49,7 +49,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form class="pt-3" action="{{ url('admin/login') }}" method="POST">
+                            <form class="pt-3" action="{{ route('admin.login') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <input type="email" name="email" id="email"

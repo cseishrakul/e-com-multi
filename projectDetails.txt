@@ -137,7 +137,7 @@
      
     17. Lets Fetch all users info from database to admin panel
 
-    // Checout
+    // Checkout
 
     18.1. Lets make delivery_addresses db_table model and fill the table with those field name:
         $table->integer('user_id');$table->string('name');$table->string('address');$table->string('city');$table->string('state');$table->string('country');$table->string('pincode');$table->string('mobile');$table->tinyInteger('status');
@@ -148,4 +148,17 @@
     18.4 Lets Update Delivery Address with the help of ajax.
     18.5 Lets add and remove delivery address with the help of ajax.
     18.9 Lets do validation of delivery_Addresses add edit form.
-    18.10 Lets fetch all data from cart in checkout page for see product name and price details + lets have payment option and delivery_addresses select option in it.
+    18.10 Lets fetch all data from cart in checkout page for see product name and price details + lets have payment option and delivery_addresses select option in it.If everything ok then lets redirect to order placement.
+
+    // Order Placement:
+    19.1 Lets have orders table and model in project and in db_table field:
+
+     $table->integer('user_id');$table->string('name');$table->string('address');$table->string('city');$table->string('state');$table->string('country');$table->string('pincode');$table->string('mobile');$table->string('email');$table->float('shipping_charges');$table->string('coupon_code');$table->float('coupon_amount');$table->string('order_status');$table->string('payment_method');$table->string('payment_gateway');$table->float('grand_total');
+
+    19.2 Lets have orders_products table and model in project and in db_field:
+
+        $table->integer('order_id');$table->integer('user_id');$table->integer('vendor_id');$table->integer('admin_id');$table->integer('product_id');$table->string('product_code');$table->string('product_name');$table->string('product_color');$table->string('product_size');$table->float('product_price');$table->integer('product_qty');
+
+    19.3 Lets place an order with cash on delivery option and fill up both data table at a same time.For this lets use DB::beginTransaction() and DB::commit() and have codes for entering data in dataTables between this.
+
+    19.4 Lets show a thanks page if user do checkout successfully and order being published + lets delete this item from cart.
