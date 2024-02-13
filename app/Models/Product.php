@@ -34,8 +34,9 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductsImage');
     }
 
-    public function vendor(){
-        return $this->belongsTo('App\Models\Vendor','vendor_id')->with('vendorbusinessdetails');
+    public function vendor()
+    {
+        return $this->belongsTo('App\Models\Vendor', 'vendor_id')->with('vendorbusinessdetails');
     }
 
     public static function discountPrice($product_id)
@@ -77,7 +78,7 @@ class Product extends Model
             $discount = 0;
         }
 
-        return array('product_price' => $proAttrPrice['price'],'final_price' => $final_price, 'discount' => $discount);
+        return array('product_price' => $proAttrPrice['price'], 'final_price' => $final_price, 'discount' => $discount);
     }
 
     public static function isProductNew($product_id)
@@ -92,5 +93,11 @@ class Product extends Model
         }
 
         return $isProductNew;
+    }
+
+    public static function getProductImage($product_id)
+    {
+        $getProductImage = Product::select('product_image')->where('id', $product_id)->first()->toArray();
+        return $getProductImage['product_image'];
     }
 }

@@ -7,11 +7,13 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Front\AddressController;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\Front\OrderController;
 use App\Http\Controllers\Front\ProductController as FrontProductController;
 use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\Front\VendorController;
@@ -129,14 +131,19 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('cms-pages', [CmsController::class, 'cmsPages']);
 
         // Coupon
-        Route::get('coupons',[CouponController::class,'coupons']);
+        Route::get('coupons', [CouponController::class, 'coupons']);
         Route::post('update-coupon-status', [CouponController::class, 'updateCouponStatus']);
         Route::get('delete-coupon/{id}', [CouponController::class, 'deleteCoupon']);
-        Route::match(['get','post'],'add-edit-coupon/{id?}',[CouponController::class,'addEditCoupon']);
+        Route::match(['get', 'post'], 'add-edit-coupon/{id?}', [CouponController::class, 'addEditCoupon']);
 
         // User
-        Route::get('users',[AdminUserController::class,'users']);
+        Route::get('users', [AdminUserController::class, 'users']);
         Route::post('update-user-status', [AdminUserController::class, 'updateUserStatus']);
+
+        // Orders
+        Route::get('orders',[AdminOrderController::class,'orders']);
+        Route::get('orders/{id}',[AdminOrderController::class,'orderDetails']);
+
     });
 });
 // End Admin Route Group
@@ -179,7 +186,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
 
     // User Controller
     Route::get('user/login-register', [UserController::class, 'loginRegister'])->name('login');
-    
+
     // User Register
     Route::post('user/register', [UserController::class, 'userRegister']);
 
@@ -198,20 +205,22 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::post("user/update-password", [UserController::class, 'userUpdatePassword']);
 
         // Apply Coupon
-        Route::post('/apply-coupon',[FrontProductController::class,'applyCoupon']);
+        Route::post('/apply-coupon', [FrontProductController::class, 'applyCoupon']);
 
 
         // Checkout
-        Route::match(['get','post'],'/checkout',[FrontProductController::class,'checkout']);
+        Route::match(['get', 'post'], '/checkout', [FrontProductController::class, 'checkout']);
 
         // Delivery Address
-        Route::post('/get-delivery-address',[AddressController::class,'getDeliveryAddress']);
+        Route::post('/get-delivery-address', [AddressController::class, 'getDeliveryAddress']);
 
-        Route::post('/save-delivery-address',[AddressController::class,'saveDeliveryAddress']);
-        Route::post('/remove-delivery-address',[AddressController::class,'removeDeliveryAddress']);
+        Route::post('/save-delivery-address', [AddressController::class, 'saveDeliveryAddress']);
+        Route::post('/remove-delivery-address', [AddressController::class, 'removeDeliveryAddress']);
 
         // Thanks
-        Route::get('thanks',[FrontProductController::class,'thanks']);
+        Route::get('thanks', [FrontProductController::class, 'thanks']);
+        // Users Orders
+        Route::get('user/orders/{id?}', [OrderController::class, 'orders']);
     });
 
     // User logout

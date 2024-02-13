@@ -37,22 +37,27 @@ $totalCartItems = totalCartItems();
                             <i class="fas fa-chevron-down u-s-m-l-9"></i>
                         </a>
                         <ul class="g-dropdown" style="width:200px">
-                            <li>
-                                <a href="cart.html">
-                                    <i class="fas fa-cog u-s-m-r-9"></i>
-                                    My Cart</a>
-                            </li>
-                            <li>
-                                <a href="wishlist.html">
-                                    <i class="far fa-heart u-s-m-r-9"></i>
-                                    My Wishlist</a>
-                            </li>
-                            {{-- <li>
+                            @if (Auth::check())
+                                <li>
+                                    <a href="{{ url('cart') }}">
+                                        <i class="fas fa-cog u-s-m-r-9"></i>
+                                        My Cart</a>
+                                </li>
+                                <li>
+                                    <a href="wishlist.html">
+                                        <i class="far fa-heart u-s-m-r-9"></i>
+                                        My Wishlist</a>
+                                </li>
+                                {{-- <li>
                                 <a href="checkout.html">
                                     <i class="far fa-check-circle u-s-m-r-9"></i>
                                     Checkout</a>
                             </li> --}}
-                            @if (Auth::check())
+                                <li>
+                                    <a href="{{ url('user/orders') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        My Orders</a>
+                                </li>
                                 <li>
                                     <a href="{{ url('user/account') }}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>

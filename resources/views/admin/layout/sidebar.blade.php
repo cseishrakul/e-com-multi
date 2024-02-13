@@ -44,6 +44,20 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic20" aria-expanded="false"
+                    aria-controls="ui-basic20">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Order Management</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic20">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/orders') }}">Orders</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         @else
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false"
@@ -116,6 +130,20 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/coupons') }}">Coupons</a>
                         </li>
                         <li class="nav-item"> <a class="nav-link" href="{{ url('admin/filters') }}">Filters</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic20" aria-expanded="false"
+                    aria-controls="ui-basic20">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Order Management</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic20">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('admin/orders') }}">Orders</a>
                         </li>
                     </ul>
                 </div>

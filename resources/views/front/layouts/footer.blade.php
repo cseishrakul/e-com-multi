@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="container">
-        <!-- Outer-Footer -->
+        {{-- <!-- Outer-Footer -->
         <div class="outer-footer-wrapper u-s-p-y-80">
             <h6>
                 For special offers and other discount information
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <!-- Mid-Footer /- -->
+        <!-- Mid-Footer /- --> --}}
         <!-- Bottom-Footer -->
         <div class="bottom-footer-wrapper">
             <div class="social-media-wrapper">

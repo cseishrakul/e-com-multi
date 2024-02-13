@@ -12,6 +12,7 @@ $(document).ready(function () {
     $("#filter").DataTable();
     $("#coupon").DataTable();
     $("#users").DataTable();
+    $("#orders").DataTable();
 
     $("#current_password").keyup(function () {
         var current_password = $("#current_password").val();

@@ -162,3 +162,15 @@
     19.3 Lets place an order with cash on delivery option and fill up both data table at a same time.For this lets use DB::beginTransaction() and DB::commit() and have codes for entering data in dataTables between this.
 
     19.4 Lets show a thanks page if user do checkout successfully and order being published + lets delete this item from cart.
+
+
+    // User Orders details
+    20. Lets make a order page for user under auth::middleware so that without login no one gonna see it.
+    20.1 In order controller let's fetch all order of this user from Order model.
+    20.2 In order model lets create a function and here lets create hasMany method with orders_products model  and use order_id as a key.
+    20.3 Lets make order details page and fetch every order by its order_id.And in this page lets fetch order details,product details,delivery addresses.
+    20.4 Lets have product image on order details page as well.for that lets make a function in product modal so that we can fetch the image of particular product
+
+    20.5 Lets show orders in admin panel & the products added by vendors show those products order details in there dashboard.They will only see order details about which product they have been added in the website.
+
+    20.6 Lets show orders details page in admin panel.Where admin can see Order details,customer details,delivery addresses,update order status,ordered products full details product name code image color qty etc.
